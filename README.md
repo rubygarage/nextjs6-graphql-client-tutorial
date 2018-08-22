@@ -473,6 +473,8 @@ This is possible because all components are dynamically exported on `components/
 
 Let's create our first atom - material Button.
 
+#### Buttom atom
+
 `components/atoms/Button/index.js`
 
 ```js
@@ -505,7 +507,7 @@ And then story for this atom.
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
-import Button from '../..';
+import { Button } from '../..';
 
 storiesOf('Button', module)
   .add('default', () => (
@@ -627,7 +629,7 @@ Add simple test for out Button component:
 ```js
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button from '../..';
+import Button from '.';
 
 describe('Button', () => {
   it('renders children when passed in', () => {
@@ -641,7 +643,7 @@ Now if we run `yarn test` we should 1 passed spec.
 
 Ok, let's add more simple components (atoms) which we will use for our home page.
 
-#### AppBar
+#### AppBar atom
 
 `components/atoms/AppBar/index.js`
 
@@ -672,7 +674,7 @@ export default AppBar;
 ```js
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import AppBar from '../..';
+import { AppBar } from '../..';
 
 storiesOf('AppBar', module)
   .add('default', () => (
@@ -692,7 +694,7 @@ storiesOf('AppBar', module)
 ```js
 import React from 'react';
 import { shallow } from 'enzyme';
-import AppBar from '../..';
+import AppBar from '.';
 
 describe('AppBar', () => {
   it('renders children when passed in', () => {
@@ -748,7 +750,7 @@ storiesOf('Card', module)
 ```js
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from '../..';
+import Card from '.';
 
 describe('Card', () => {
   it('renders children when passed in', () => {
@@ -759,9 +761,74 @@ describe('Card', () => {
       </Card>,
     );
     expect(wrapper.contains('Test')).toBe(true);
+    expect(wrapper.contains('Some text')).toBe(true);
   });
 });
 ```
+
+#### CardActions atom
+
+`components/atoms/CardActions/index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import { CardActions as MaterialCardActions } from '@material-ui/core';
+
+const CardActions = (props) => {
+  const { children, ...defaultProps } = props;
+
+  return (
+    <MaterialCardActions {...defaultProps}>
+      {children}
+    </MaterialCardActions>
+  );
+};
+
+CardActions.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+
+export default CardActions;
+```
+
+`components/atoms/CardActions/index.stories.js`
+
+```js
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { CardActions, Button } from '../..';
+
+storiesOf('CardActions', module)
+  .add('with button', () => (
+    <CardActions>
+      <Button>Button</Button>
+    </CardActions>
+  ));
+```
+
+`components/atoms/CardActions/index.test.js`
+
+```js
+import React from 'react';
+import { shallow } from 'enzyme';
+import CardActions from '.';
+
+describe('CardActions', () => {
+  it('renders children when passed in', () => {
+    const wrapper = shallow(
+      <CardActions>
+        <p>Some text</p>
+        <p>Test</p>
+      </CardActions>,
+    );
+    expect(wrapper.contains('Test')).toBe(true);
+    expect(wrapper.contains('Some text')).toBe(true);
+  });
+});
+```
+
+
 
 
 

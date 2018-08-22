@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from '.';
+import CardActions from '.';
 
-describe('Card', () => {
+describe('CardActions', () => {
   it('renders children when passed in', () => {
     const wrapper = shallow(
-      <Card>
+      <CardActions>
         <p>Some text</p>
         <p>Test</p>
-      </Card>,
+      </CardActions>,
     );
     expect(wrapper.contains('Test')).toBe(true);
     expect(wrapper.contains('Some text')).toBe(true);

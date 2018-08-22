@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AppBar from '../..';
+import AppBar from '.';
 
 describe('AppBar', () => {
   it('renders children when passed in', () => {

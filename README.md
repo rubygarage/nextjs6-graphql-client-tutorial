@@ -639,7 +639,9 @@ describe('Button', () => {
 
 Now if we run `yarn test` we should 1 passed spec.
 
-Ok, let's add more simple components (atoms) which we will use for our home page:
+Ok, let's add more simple components (atoms) which we will use for our home page.
+
+#### AppBar
 
 `components/atoms/AppBar/index.js`
 

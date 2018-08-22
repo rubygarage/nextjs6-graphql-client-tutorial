@@ -493,7 +493,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Button;
@@ -663,7 +663,7 @@ const AppBar = (props) => {
 };
 
 AppBar.propTypes = {
-  children: PropTypes.shape().isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AppBar;
@@ -724,7 +724,7 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Card;
@@ -786,7 +786,7 @@ const CardActions = (props) => {
 };
 
 CardActions.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default CardActions;
@@ -848,7 +848,7 @@ const CardContent = (props) => {
 };
 
 CardContent.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default CardContent;
@@ -892,17 +892,12 @@ describe('CardContent', () => {
 ```
 
 
+We're gonna create few more atoms using same approach:
 
+- IconButton
+- List
+- ListItem
 
-
-
-
-
-We're gonna create few more atoms using same approach.
-
-This is possible because all components are dynamically exported on src-example/components/index.js and imported in a way that Atomic Design structure doesn't matter:
-
-In the `components` directory we will create `index.js` dynamically export all atoms moleculus organisms etc.
 
 `components/index.js`
 

@@ -13,7 +13,7 @@ const AppBar = (props) => {
 };
 
 AppBar.propTypes = {
-  children: PropTypes.shape().isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AppBar;

@@ -13,7 +13,7 @@ const CardContent = (props) => {
 };
 
 CardContent.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default CardContent;

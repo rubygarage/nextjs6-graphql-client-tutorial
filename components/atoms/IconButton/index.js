@@ -13,7 +13,7 @@ const IconButton = (props) => {
 };
 
 IconButton.propTypes = {
-  children: PropTypes.shape().isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default IconButton;

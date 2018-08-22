@@ -13,7 +13,7 @@ const List = (props) => {
 };
 
 List.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default List;

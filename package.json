@@ -1,0 +1,9 @@
+{
+  "name": "nextjs6-graphql-client-tutorial",
+  "version": "0.1.0",
+  "description": "NextJS6 with apollo graphQL app",
+  "main": "index.js",
+  "repository": "git@github.com:leksster/nextjs6-graphql-client-tutorial.git",
+  "author": "Alex Bykov <leksster@gmail.com>",
+  "license": "MIT"
+}

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import StarIcon from '@material-ui/icons/Star';
 import SendIcon from '@material-ui/icons/Send';
 import MailIcon from '@material-ui/icons/Mail';
-import ListItemIcon from '.';
+import { ListItemIcon } from '../..';
 
 storiesOf('ListItemIcon', module)
   .add('star', () => (

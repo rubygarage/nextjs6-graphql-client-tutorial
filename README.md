@@ -900,6 +900,7 @@ We're gonna create few more atoms using same approach:
 - MenuIcon
 - SwipeableDrawer
 - Toolbar
+- Typography
 
 
 `components/index.js`

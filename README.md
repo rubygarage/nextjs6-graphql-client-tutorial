@@ -828,6 +828,68 @@ describe('CardActions', () => {
 });
 ```
 
+#### CardContent atom
+
+`components/atoms/CardContent/index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import { CardContent as MaterialCardContent } from '@material-ui/core';
+
+const CardContent = (props) => {
+  const { children, ...defaultProps } = props;
+
+  return (
+    <MaterialCardContent {...defaultProps}>
+      {children}
+    </MaterialCardContent>
+  );
+};
+
+CardContent.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+
+export default CardContent;
+```
+
+`components/atoms/CardContent/index.stories.js`
+
+```js
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { CardContent } from '../..';
+
+storiesOf('CardContent', module)
+  .add('default', () => (
+    <CardContent>
+      <p>Lorem</p>
+      <p>Lorem Ipsum</p>
+    </CardContent>
+  ));
+```
+
+`components/atoms/CardContent/index.test.js`
+
+```js
+import React from 'react';
+import { shallow } from 'enzyme';
+import CardContent from '.';
+
+describe('CardContent', () => {
+  it('renders children when passed in', () => {
+    const wrapper = shallow(
+      <CardContent>
+        <p>Lorem</p>
+        <p>Ipsum</p>
+      </CardContent>,
+    );
+    expect(wrapper.contains('Lorem')).toBe(true);
+    expect(wrapper.contains('Ipsum')).toBe(true);
+  });
+});
+```
 
 
 

@@ -5,6 +5,7 @@ import { Card } from '../..';
 storiesOf('Card', module)
   .add('default', () => (
     <Card>
-      Default
+      <p>Title</p>
+      <p>Default</p>
     </Card>
   ));

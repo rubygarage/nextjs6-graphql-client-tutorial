@@ -6,5 +6,6 @@ storiesOf('CardActions', module)
   .add('with button', () => (
     <CardActions>
       <Button>Button</Button>
+      <Button>Button</Button>
     </CardActions>
   ));

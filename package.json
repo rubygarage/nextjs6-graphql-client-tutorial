@@ -16,6 +16,7 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3"
+    "babel-core": "^6.26.3",
+    "eslint": "^5.4.0"
   }
 }

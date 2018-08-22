@@ -897,6 +897,7 @@ We're gonna create few more atoms using same approach:
 - IconButton
 - List
 - ListItem
+- MenuIcon
 
 
 `components/index.js`

@@ -896,6 +896,8 @@ describe('CardContent', () => {
 
 
 
+
+
 We're gonna create few more atoms using same approach.
 
 This is possible because all components are dynamically exported on src-example/components/index.js and imported in a way that Atomic Design structure doesn't matter:

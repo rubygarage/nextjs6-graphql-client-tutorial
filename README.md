@@ -898,6 +898,8 @@ We're gonna create few more atoms using same approach:
 - List
 - ListItem
 - MenuIcon
+- SwipeableDrawer
+- Toolbar
 
 
 `components/index.js`

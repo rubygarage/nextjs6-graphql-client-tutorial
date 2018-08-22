@@ -7,6 +7,7 @@
   "author": "Alex Bykov <leksster@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "storybook": "start-storybook -p 9001 -c .storybook",
     "dev": "next"
   },
   "dependencies": {

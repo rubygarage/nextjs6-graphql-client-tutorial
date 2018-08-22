@@ -454,6 +454,23 @@ https://github.com/Rulox/react-atomic-structure
 https://github.com/danilowoz/react-atomic-design
 http://ubie.io/atomic-design/
 
+First of all create `index.js` entrypoint for components directory:
+
+`components/index.js`
+
+```
+const req = require.context('.', true, /\.\/[^/]+\/[^/]+\/index\.js$/);
+
+req.keys().forEach((key) => {
+  const componentName = key.replace(/^.+\/([^/]+)\/index\.js/, '$1');
+  module.exports[componentName] = req(key).default;
+});
+```
+
+Atomic Design should be a solution, not another problem. If you want to create a component and don't know where to put it (`atoms`, `molecules`, `organisms` etc.), do not worry, do not think too much, just put it anywhere. After you realize what it is, just move the component folder to the right place. Everything else should work.
+
+This is possible because all components are dynamically exported on `components/index.js` and imported in a way that Atomic Design structure doesn't matter:
+
 Let's create our first atom - material Button.
 
 `components/atoms/Button/index.js`
@@ -682,6 +699,71 @@ describe('AppBar', () => {
   });
 });
 ```
+
+#### Card atom
+
+`components/atoms/Card/index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Card as MaterialCard } from '@material-ui/core';
+
+const Card = (props) => {
+  const { children, ...defaultProps } = props;
+
+  return (
+    <MaterialCard {...defaultProps}>
+      {children}
+    </MaterialCard>
+  );
+};
+
+Card.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
+
+export default Card;
+```
+
+`components/atoms/Card/index.stories.js`
+
+```js
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { Card } from '.';
+
+storiesOf('Card', module)
+  .add('default', () => (
+    <Card>
+      Default
+    </Card>
+  ));
+```
+
+`components/atoms/Card/index.test.js`
+
+```js
+import React from 'react';
+import { shallow } from 'enzyme';
+import Card from '.';
+
+describe('Card', () => {
+  it('renders children when passed in', () => {
+    const wrapper = shallow(
+      <Card>
+        <p>Some text</p>
+        <p>Test</p>
+      </Card>,
+    );
+    expect(wrapper.contains('Test')).toBe(true);
+  });
+});
+```
+
+
+
+
 
 We're gonna create few more atoms using same approach.
 

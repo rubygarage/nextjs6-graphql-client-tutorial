@@ -6,6 +6,9 @@
   "repository": "git@github.com:leksster/nextjs6-graphql-client-tutorial.git",
   "author": "Alex Bykov <leksster@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "next"
+  },
   "dependencies": {
     "next": "^6.1.1",
     "prop-types": "^15.6.2",

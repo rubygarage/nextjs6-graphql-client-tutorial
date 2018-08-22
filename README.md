@@ -891,7 +891,6 @@ describe('CardContent', () => {
 });
 ```
 
-
 We're gonna create few more atoms using same approach:
 
 - IconButton
@@ -903,16 +902,20 @@ We're gonna create few more atoms using same approach:
 - Typography
 
 
-`components/index.js`
+## TODO
 
-```js
-const req = require.context('.', true, /\.\/[^/]+\/[^/]+\/index\.js$/);
+- [ ] Moleculus
+- [ ] Ogranisms
+- [ ] Templates
+- [ ] Pages
+- [ ] Snapshot testing
+- [ ] Apollo Integration
+- [ ] Cookies
+- [ ] Github Authentication
+- [ ] Server side secrets
 
-req.keys().forEach((key) => {
-  const componentName = key.replace(/^.+\/([^/]+)\/index\.js/, '$1');
-  module.exports[componentName] = req(key).default;
-});
-```
+
+## Draft
 
 Add fetch
 
@@ -925,13 +928,6 @@ Add cookies manager lib
 ```
 yarn add js-cookie
 ```
-
-
-## TODO
-
-
-
-
 
 For snapshot testing:
 

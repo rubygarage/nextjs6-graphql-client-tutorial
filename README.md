@@ -458,7 +458,7 @@ First of all create `index.js` entrypoint for components directory:
 
 `components/index.js`
 
-```
+```js
 const req = require.context('.', true, /\.\/[^/]+\/[^/]+\/index\.js$/);
 
 req.keys().forEach((key) => {
@@ -505,7 +505,7 @@ And then story for this atom.
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
-import Button from '.';
+import Button from '../..';
 
 storiesOf('Button', module)
   .add('default', () => (
@@ -627,7 +627,7 @@ Add simple test for out Button component:
 ```js
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button from '.';
+import Button from '../..';
 
 describe('Button', () => {
   it('renders children when passed in', () => {
@@ -672,7 +672,7 @@ export default AppBar;
 ```js
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import AppBar from '.';
+import AppBar from '../..';
 
 storiesOf('AppBar', module)
   .add('default', () => (
@@ -692,7 +692,7 @@ storiesOf('AppBar', module)
 ```js
 import React from 'react';
 import { shallow } from 'enzyme';
-import AppBar from '.';
+import AppBar from '../..';
 
 describe('AppBar', () => {
   it('renders children when passed in', () => {
@@ -733,7 +733,7 @@ export default Card;
 ```js
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Card } from '.';
+import { Card } from '../..';
 
 storiesOf('Card', module)
   .add('default', () => (
@@ -748,7 +748,7 @@ storiesOf('Card', module)
 ```js
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from '.';
+import Card from '../..';
 
 describe('Card', () => {
   it('renders children when passed in', () => {

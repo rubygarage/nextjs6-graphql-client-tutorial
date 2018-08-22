@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from '.';
+import Card from '../..';
 
 describe('Card', () => {
   it('renders children when passed in', () => {

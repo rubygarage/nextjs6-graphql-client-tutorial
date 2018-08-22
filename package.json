@@ -6,6 +6,9 @@
   "repository": "git@github.com:leksster/nextjs6-graphql-client-tutorial.git",
   "author": "Alex Bykov <leksster@gmail.com>",
   "license": "MIT",
+  "jest": {
+    "setupTestFrameworkScriptFile": "./lib/testConfig.js"
+  },
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
     "dev": "next"

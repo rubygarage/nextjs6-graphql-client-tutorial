@@ -11,7 +11,8 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "dev": "next"
+    "dev": "next",
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^1.5.1",

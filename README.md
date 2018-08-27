@@ -943,9 +943,6 @@ We're gonna create few more atoms using same approach:
 
 Molecules are groups of two or more atoms held together by chemical bonds. These combinations of atoms take on their own unique properties, and become more tangible and operational than atoms.
 
-
-## Organizms
-
 Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.
 
 For example, a form label, input or button aren’t too useful by themselves, but combine them together as a form and now they can actually do something together.
@@ -956,7 +953,7 @@ Building up to molecules from atoms encourages a “do one thing and do it well�
 
 Now we gonna create first moleculue component. It will be Sidebar Menu which will consist of atoms.
 
-`components/moleculus/CardContent/index.js`
+`components/moleculus/SideBarMenu/index.js`
 
 ```js
 import React from 'react';
@@ -987,7 +984,7 @@ SideBarMenu.propTypes = {
 export default SideBarMenu;
 ```
 
-`components/moleculus/CardContent/index.stories.js`
+`components/moleculus/SideBarMenu/index.stories.js`
 
 ```js
 import React from 'react';
@@ -1000,7 +997,7 @@ storiesOfoleculus/SideBarMenu', module)
   ));
 ```
 
-`components/moleculus/CardContent/index.test.js`
+`components/moleculus/SideBarMenu/index.test.js`
 
 ```js
 import React from 'react';
@@ -1020,7 +1017,15 @@ describe('SideBarMenu', () => {
 });
 ```
 
+## Organizms
 
+Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
+
+We’re starting to get increasingly concrete. A client might not be terribly interested in the molecules of a design system, but with organisms we can see the final interface beginning to take shape. Dan Mall (who I’m working with on several projects) uses element collages, which articulate ideas for a few key organisms to facilitate client conversations and shape the visual direction (all without having to construct full comps).
+
+Organisms can consist of similar and/or different molecule types. For example, a masthead organism might consist of diverse components like a logo, primary navigation, search form, and list of social media channels. But a “product grid” organism might consist of the same molecule (possibly containing a product image, product title and price) repeated over and over again.
+
+Building up from molecules to organisms encourages creating standalone, portable, reusable components.
 
 ## TODO
 

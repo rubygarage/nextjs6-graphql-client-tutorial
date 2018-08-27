@@ -9,5 +9,8 @@
     "test": {
       "presets": ["react", "env"]
     }
-  }
+  },
+  "plugins": [
+    "require-context-hook"
+  ]
 }

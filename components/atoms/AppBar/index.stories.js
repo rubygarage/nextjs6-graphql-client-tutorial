@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { AppBar } from '../..';
 
-storiesOf('AppBar', module)
+storiesOf('atoms/AppBar', module)
   .add('default', () => (
     <AppBar>
       <div>Example of AppBar</div>

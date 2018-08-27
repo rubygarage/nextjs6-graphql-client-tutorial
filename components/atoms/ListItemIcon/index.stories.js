@@ -5,7 +5,7 @@ import SendIcon from '@material-ui/icons/Send';
 import MailIcon from '@material-ui/icons/Mail';
 import { ListItemIcon } from '../..';
 
-storiesOf('ListItemIcon', module)
+storiesOf('atoms/ListItemIcon', module)
   .add('star', () => (
     <ListItemIcon>
       <StarIcon />

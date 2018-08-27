@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { SwipeableDrawer } from '../..';
 
-storiesOf('SwipeableDrawer', module)
+storiesOf('atoms/SwipeableDrawer', module)
   .add('default', () => (
     <SwipeableDrawer open>
       Default

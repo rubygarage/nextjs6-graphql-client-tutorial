@@ -13,7 +13,11 @@ const ListItemText = (props) => {
 };
 
 ListItemText.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+};
+
+ListItemText.defaultProps = {
+  children: null,
 };
 
 export default ListItemText;

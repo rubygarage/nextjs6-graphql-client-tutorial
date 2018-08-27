@@ -419,6 +419,36 @@ configure(loadStories, module);
 
 Here we use Webpack’s require.context to load modules dynamically. Have a look at the relevant Webpack docs to learn more about how to use require.context.
 
+Jest doesn't support webpack require.context. So we need to add babel plugin to make it work.
+
+```bash
+yarn add babel-plugin-require-context-hook -D
+```
+
+Update babel config:
+
+`.babelrc`
+
+```js
+"plugins": [
+  "require-context-hook"
+]
+```
+
+Initialize require context hook in testConfig:
+
+`lib/testConfig.js`
+
+```js
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import registerRequireContextHook from 'babel-plugin-require-context-hook/register';
+
+registerRequireContextHook();
+
+export default configure({ adapter: new Adapter() });
+```
+
 All files with `.stories` extension inside the `src/components` will be required dynamically.
 
 Create separate babel config for storybook to avoid conflicts with different environments.
@@ -473,6 +503,14 @@ This is possible because all components are dynamically exported on `components/
 
 Let's create our first atom - material Button.
 
+## Atoms
+
+Atoms are the basic building blocks of matter. Applied to web interfaces, atoms are our HTML tags, such as a form label, an input or a button.
+
+Atoms can also include more abstract elements like color palettes, fonts and even more invisible aspects of an interface like animations.
+
+Like atoms in nature they’re fairly abstract and often not terribly useful on their own. However, they’re good as a reference in the context of a pattern library as you can see all your global styles laid out at a glance.
+
 #### Buttom atom
 
 `components/atoms/Button/index.js`
@@ -509,7 +547,7 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { Button } from '../..';
 
-storiesOf('Button', module)
+storiesOf('atoms/Button', module)
   .add('default', () => (
     <Button onClick={action('clicked')}>
       Default
@@ -676,7 +714,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { AppBar } from '../..';
 
-storiesOf('AppBar', module)
+storiesOf('atoms/AppBar', module)
   .add('default', () => (
     <AppBar>
       <div>Example of AppBar</div>
@@ -737,7 +775,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Card } from '../..';
 
-storiesOf('Card', module)
+storiesOf('atoms/Card', module)
   .add('default', () => (
     <Card>
       Default
@@ -799,7 +837,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { CardActions, Button } from '../..';
 
-storiesOf('CardActions', module)
+storiesOftoms/CardActions', module)
   .add('with button', () => (
     <CardActions>
       <Button>Button</Button>
@@ -861,7 +899,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { CardContent } from '../..';
 
-storiesOf('CardContent', module)
+storiesOfardContent', module)
   .add('default', () => (
     <CardContent>
       <p>Lorem</p>
@@ -901,6 +939,88 @@ We're gonna create few more atoms using same approach:
 - Toolbar
 - Typography
 
+## Moleculus
+
+Molecules are groups of two or more atoms held together by chemical bonds. These combinations of atoms take on their own unique properties, and become more tangible and operational than atoms.
+
+
+## Organizms
+
+Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.
+
+For example, a form label, input or button aren’t too useful by themselves, but combine them together as a form and now they can actually do something together.
+
+Building up to molecules from atoms encourages a “do one thing and do it well” mentality. While molecules can be complex, as a rule of thumb they are relatively simple combinations of atoms built for reuse.
+
+#### SideBarMenu Molecule
+
+Now we gonna create first moleculue component. It will be Sidebar Menu which will consist of atoms.
+
+`components/moleculus/CardContent/index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import {
+  List, ListItem, ListItemText,
+} from '../..';
+
+const SideBarMenu = (props) => {
+  const { menuItems } = props;
+
+  return (
+    <List>
+      {menuItems.map(item => (
+        <ListItem key={item} button>
+          <ListItemText primary={item} />
+        </ListItem>
+      ))}
+    </List>
+  );
+};
+
+SideBarMenu.propTypes = {
+  menuItems: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default SideBarMenu;
+```
+
+`components/moleculus/CardContent/index.stories.js`
+
+```js
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { SideBarMenu } from '../..';
+
+storiesOfoleculus/SideBarMenu', module)
+  .add('default', () => (
+    <SideBarMenu menuItems={['First', 'Second', 'Third']} />
+  ));
+```
+
+`components/moleculus/CardContent/index.test.js`
+
+```js
+import React from 'react';
+import { shallow } from 'enzyme';
+import SideBarMenu from '.';
+import { ListItem, ListItemText } from '../..';
+
+describe('SideBarMenu', () => {
+  it('renders correct menu items using array of strings as props', () => {
+    const wrapper = shallow(<SideBarMenu menuItems={['foo', 'bar', 'baz']} />);
+    expect(wrapper.find(ListItem)).toHaveLength(3);
+
+    const props = wrapper.find(ListItemText).map(node => node.props().primary);
+
+    expect(props).toEqual(['foo', 'bar', 'baz']);
+  });
+});
+```
+
+
 
 ## TODO
 
@@ -916,6 +1036,24 @@ We're gonna create few more atoms using same approach:
 
 
 ## Draft
+
+Babel plugin resolver
+
+```bash
+yarn add babel-plugin-module-resolver -D
+```
+
+```js
+"plugins": [
+  ["module-resolver", {
+    "root": ["."],
+    "alias": {
+      "components": "./components"
+    }
+  }]
+]
+```
+
 
 Add fetch
 

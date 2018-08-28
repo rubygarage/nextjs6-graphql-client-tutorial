@@ -7,7 +7,7 @@
       "presets": ["next/babel"]
     },
     "test": {
-      "presets": ["react", "env"]
+      "presets": ["react", "env", "stage-0"]
     }
   },
   "plugins": [

@@ -7,5 +7,5 @@ storiesOf('moleculus/Header', module)
     <Header />
   ))
   .add('with title', () => (
-    <Header title="Home"/>
+    <Header title="Home" />
   ));

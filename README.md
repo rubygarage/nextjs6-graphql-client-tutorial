@@ -617,7 +617,7 @@ We need need different babel presets for test environment specifically for nextj
       "presets": ["next/babel"]
     },
     "test": {
-      "presets": ["react", "env"]
+      "presets": ["react", "env", "stage-0"]
     }
   }
 }
@@ -1003,21 +1003,136 @@ storiesOfoleculus/SideBarMenu', module)
 import React from 'react';
 import { shallow } from 'enzyme';
 import SideBarMenu from '.';
-import { ListItem, ListItemText } from '../..';
+import { ListItem, ListItemText, SwipeableDrawer } from '../..';
 
 describe('SideBarMenu', () => {
   it('renders correct menu items using array of strings as props', () => {
-    const wrapper = shallow(<SideBarMenu menuItems={['foo', 'bar', 'baz']} />);
+    const mockedOpenMenu = jest.fn();
+    mockedOpenMenu.mockReturnValueOnce(true);
+
+    const mockedCloseMenu = jest.fn();
+    mockedCloseMenu.mockReturnValueOnce(true);
+
+    const wrapper = shallow(
+      <SideBarMenu
+        menuItems={['foo', 'bar', 'baz']}
+        openMenu={mockedOpenMenu}
+        closeMenu={mockedCloseMenu}
+      />,
+    );
+
     expect(wrapper.find(ListItem)).toHaveLength(3);
 
-    const props = wrapper.find(ListItemText).map(node => node.props().primary);
+    const swipeableDrawer = wrapper.find(SwipeableDrawer);
+    expect(swipeableDrawer.props().onClose()).toEqual(true);
+    expect(swipeableDrawer.props().onOpen()).toEqual(true);
 
+    const props = wrapper.find(ListItemText).map(node => node.props().primary);
     expect(props).toEqual(['foo', 'bar', 'baz']);
   });
 });
 ```
 
-## Organizms
+#### Header molecule
+
+`components/moleculus/Header/index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+import {
+  AppBar, IconButton,
+  MenuIcon, Toolbar, Typography,
+} from '../..';
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
+
+const Header = (props) => {
+  const {
+    classes, swipeableMenu, loginButton, title,
+  } = props;
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        {swipeableMenu}
+        <Toolbar>
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            {title}
+          </Typography>
+          {loginButton}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
+
+Header.propTypes = {
+  swipeableMenu: PropTypes.node,
+  loginButton: PropTypes.node,
+  classes: PropTypes.node.isRequired,
+  title: PropTypes.string,
+};
+
+Header.defaultProps = {
+  swipeableMenu: null,
+  loginButton: null,
+  title: null,
+};
+
+export default withStyles(styles)(Header);
+```
+
+`components/moleculus/Header/index.stories.js`
+
+```js
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { Header } from '../..';
+
+storiesOf('moleculus/Header', module)
+  .add('default', () => (
+    <Header />
+  ))
+  .add('with title', () => (
+    <Header title="Home" />
+  ));
+```
+
+`components/moleculus/Header/index.test.js`
+
+```js
+import React from 'react';
+import { mount } from 'enzyme';
+import { Header, Typography } from '../..';
+
+describe('Header', () => {
+  it('renders header with correct title', () => {
+    const wrapper = mount(<Header title="foo" />);
+    const typographyNode = wrapper.find(Typography);
+
+    expect(typographyNode.text()).toEqual('foo');
+  });
+});
+```
+
+## Organisms
 
 Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
 
@@ -1027,17 +1142,97 @@ Organisms can consist of similar and/or different molecule types. For example, a
 
 Building up from molecules to organisms encourages creating standalone, portable, reusable components.
 
-## TODO
+#### Header with swipeable menu organism
 
-- [ ] Moleculus
-- [ ] Ogranisms
+`components/organisms/HeaderWithMenu/index.js`
+
+```js
+import React from 'react';
+import { Header, SwipeableMenu } from '../..';
+
+class HeaderWithMenu extends React.Component {
+  state = {
+    leftMenuIsOpened: false,
+  };
+
+  toggleLeftMenuShow = leftMenuIsOpened => () => {
+    this.setState({
+      leftMenuIsOpened,
+    });
+  };
+
+  render() {
+    const {
+      state: {
+        leftMenuIsOpened,
+      },
+      toggleLeftMenuShow,
+    } = this;
+
+    return (
+      <Header
+        openMenu={toggleLeftMenuShow(true)}
+        title="Home"
+        swipeableMenu={(
+          <SwipeableMenu
+            isOpenedByDefault={leftMenuIsOpened}
+            closeMenu={toggleLeftMenuShow(false)}
+            openMenu={toggleLeftMenuShow(true)}
+            menuItems={['Trending']}
+          />
+        )}
+      />
+    );
+  }
+}
+
+export default HeaderWithMenu;
+```
+
+`components/organisms/HeaderWithMenu/index.stories.js`
+
+```js
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { HeaderWithMenu } from '../..';
+
+storiesOf('organisms/HeaderWithMenu', module)
+  .add('default', () => (
+    <HeaderWithMenu />
+  ));
+```
+
+`components/organisms/HeaderWithMenu/index.test.js`
+
+```js
+import React from 'react';
+import { shallow } from 'enzyme';
+import { HeaderWithMenu } from '../..';
+
+describe('HeaderWithMenu', () => {
+  it('renders component', () => {
+    const wrapper = shallow(<HeaderWithMenu />);
+
+    const header = wrapper.find(Header);
+    expect(header).toHaveLength(1);
+    expect(header.props().title).toEqual('Home');
+    expect(header.props().swipeableMenu).toBeDefined();
+  });
+});
+```
+
+
+## Progress
+
+- [x] Moleculus
+- [x] Organisms
 - [ ] Templates
 - [ ] Pages
-- [ ] Snapshot testing
-- [ ] Apollo Integration
-- [ ] Cookies
-- [ ] Github Authentication
 - [ ] Server side secrets
+- [ ] Github Authentication
+- [ ] Cookies
+- [ ] Apollo Integration
+- [ ] Snapshot testing
 
 
 ## Draft

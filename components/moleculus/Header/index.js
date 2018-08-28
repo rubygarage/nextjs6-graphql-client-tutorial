@@ -22,7 +22,7 @@ const styles = {
 
 const Header = (props) => {
   const {
-    classes, swipeableMenu, loginButton, title,
+    classes, swipeableMenu, loginButton, title, openMenu
   } = props;
 
   return (
@@ -30,7 +30,7 @@ const Header = (props) => {
       <AppBar position="static">
         {swipeableMenu}
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          <IconButton onClick={openMenu} className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
@@ -46,71 +46,16 @@ const Header = (props) => {
 Header.propTypes = {
   swipeableMenu: PropTypes.node,
   loginButton: PropTypes.node,
-  classes: PropTypes.node.isRequired,
+  classes: PropTypes.shape().isRequired,
   title: PropTypes.string,
+  openMenu: PropTypes.func,
 };
 
 Header.defaultProps = {
   swipeableMenu: null,
   loginButton: null,
   title: null,
+  openMenu: null,
 };
 
 export default withStyles(styles)(Header);
-
-// class Header extends React.Component {
-//   state = {
-//     leftMenuIsOpened: false,
-//   };
-
-//   static propTypes = {
-//     classes: PropTypes.shape({}).isRequired,
-//     loggedIn: PropTypes.bool.isRequired,
-//     handleLogIn: PropTypes.func.isRequired,
-//   };
-
-//   toggleLeftMenuShow = leftMenuIsOpened => () => {
-//     this.setState({
-//       leftMenuIsOpened,
-//     });
-//   };
-
-//   render() {
-//     const {
-//       props: {
-//         classes,
-//         loggedIn,
-//         handleLogIn,
-//       },
-//       state: {
-//         leftMenuIsOpened,
-//       },
-//       toggleLeftMenuShow,
-//     } = this;
-
-//     return (
-//       <div className={classes.root}>
-//         <AppBar position="static">
-//           <SwipeableDrawer
-//             open={leftMenuIsOpened}
-//             onClose={toggleLeftMenuShow(false)}
-//             onOpen={toggleLeftMenuShow(true)}
-//           >
-//             <SideBarMenu />
-//           </SwipeableDrawer>
-//           <Toolbar>
-//             <IconButton onClick={toggleLeftMenuShow(true)} className={classes.menuButton} color="inherit" aria-label="Menu">
-//               <MenuIcon />
-//             </IconButton>
-//             <Typography variant="title" color="inherit" className={classes.flex}>
-//               News
-//             </Typography>
-//             {loggedIn && <Button onClick={handleLogIn} color="inherit">Login</Button>}
-//           </Toolbar>
-//         </AppBar>
-//       </div>
-//     );
-//   }
-// }
-
-// export default withStyles(styles)(Header);

@@ -13,8 +13,8 @@ const SwipeableMenu = (props) => {
   return (
     <SwipeableDrawer
       open={isOpenedByDefault}
-      onClose={openMenu}
-      onOpen={closeMenu}
+      onClose={closeMenu}
+      onOpen={openMenu}
     >
       <List>
         {menuItems.map(item => (
@@ -35,7 +35,7 @@ SwipeableMenu.propTypes = {
 };
 
 SwipeableMenu.defaultProps = {
-  isOpenedByDefault: false
+  isOpenedByDefault: false,
 };
 
 export default SwipeableMenu;

@@ -430,9 +430,12 @@ Update babel config:
 `.babelrc`
 
 ```js
-"plugins": [
-  "require-context-hook"
-]
+"test": {
+  "presets": ["react", "env", "stage-0"],
+  "plugins": [
+    "require-context-hook"
+  ]
+}
 ```
 
 Initialize require context hook in testConfig:
@@ -1420,6 +1423,31 @@ describe('Home', () => {
   });
 });
 ```
+
+## Pages
+
+Now we can use nextjs pages as an entry point
+
+`index.js`
+
+```js
+import React from 'react';
+import { Home } from '../components';
+
+const Index = () => (
+  <Home />
+);
+
+export default Index;
+```
+
+The file-system is the main API. Every .js file becomes a route that gets automatically processed and rendered.
+
+Now if we run `yarn dev` we can access this page on `localhost:3000`
+
+
+
+
 
 ## Draft (remove later)
 

@@ -1445,7 +1445,20 @@ The file-system is the main API. Every .js file becomes a route that gets automa
 
 Now if we run `yarn dev` we can access this page on `localhost:3000`
 
+## Add github app secret keys
 
+We can use `next.config.js` for storing secret api keys. Which will be available only on server side.
+
+`next.config.js`
+
+```js
+module.exports = {
+  serverRuntimeConfig: {
+    GithubClientId: '<ClientId>',
+    GithubClientSecret: '<ClientSecret>',
+  },
+};
+```
 
 
 

@@ -1311,6 +1311,116 @@ describe('HeaderWithMenu', () => {
 });
 ```
 
+## Templates
+
+Templates are page-level objects that place components into a layout and articulate the design’s underlying content structure. To build on our previous example, we can take the HeaderWithMenu organism and apply it to a home template.
+
+This Home template displays all the necessary page components functioning together, which provides context for these relatively abstract molecules and organisms. When crafting an effective design system, it’s critical to demonstrate how components look and function together in the context of a layout to prove the parts add up to a well-functioning whole.
+
+Another important characteristic of templates is that they focus on the page’s underlying content structure rather than the page’s final content. Design systems must account for the dynamic nature of content, so it’s very helpful to articulate important properties of components like image sizes and character lengths for headings and text passages.
+
+#### Home template
+
+`index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
+import Router from 'next/router';
+
+import {
+  HeaderWithMenu, SimpleCard,
+} from '../..';
+
+const styles = {
+  container: {
+    'overflow-x': 'hidden',
+  },
+};
+
+class Home extends React.PureComponent {
+  static propTypes = {
+    classes: PropTypes.shape({}).isRequired,
+    cards: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+    })),
+  };
+
+  static defaultProps = {
+    cards: [],
+  };
+
+  render() {
+    const { props: { cards } } = this;
+
+    return (
+      <div>
+        <HeaderWithMenu />
+        <div style={{ padding: 12 }}>
+          <Grid container spacing={24} style={{ padding: 24 }}>
+            {cards.map(card => (
+              <Grid key={card.title} item xs={6} sm={4} lg={3} xl={2}>
+                <SimpleCard
+                  title={card.title}
+                  description={card.description}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default withStyles(styles)(Home);
+```
+
+`index.stories.js`
+
+```js
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { Home } from '../..';
+
+storiesOf('templates/Home', module)
+  .add('default', () => (
+    <Home
+      cards={[
+        { title: 'foo', description: 'bar' },
+        { title: 'baz', description: 'craz' },
+        { title: 'saz', description: 'taz' },
+      ]}
+    />
+  ));
+```
+
+`index.test.js`
+
+```js
+import React from 'react';
+import { mount } from 'enzyme';
+import { Home, SimpleCard } from '../..';
+
+describe('Home', () => {
+  it('renders component', () => {
+    const wrapper = mount(
+      <Home
+        cards={[
+          { title: '1', description: 'first' },
+          { title: '2', description: 'second' },
+        ]}
+      />,
+    );
+
+    expect(wrapper.find(SimpleCard)).toHaveLength(2);
+  });
+});
+```
+
 ## Draft (remove later)
 
 Babel plugin resolver

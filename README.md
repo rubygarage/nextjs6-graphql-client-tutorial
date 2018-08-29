@@ -1445,6 +1445,36 @@ The file-system is the main API. Every .js file becomes a route that gets automa
 
 Now if we run `yarn dev` we can access this page on `localhost:3000`
 
+## Snapshot testing
+
+Snapshot tests are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
+
+A typical snapshot test case for a mobile app renders a UI component, takes a screenshot, then compares it to a reference image stored alongside the test. The test will fail if the two images do not match: either the change is unexpected, or the screenshot needs to be updated to the new version of the UI component.
+
+Add react-test-renderer
+
+```bash
+yarn add react-test-renderer -D
+```
+
+This package provides a React renderer that can be used to render React components to pure JavaScript objects, without depending on the DOM or a native mobile environment.
+
+`__tests__/index.test.js`
+
+```js
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Index from '../pages';
+
+describe('Home Page', () => {
+  it('matches snapshot', () => {
+    const component = renderer.create(<Index />);
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+```
+
 ## Add github app secret keys
 
 We can use `next.config.js` for storing secret api keys. Which will be available only on server side.
@@ -1492,59 +1522,6 @@ Add cookies manager lib
 
 ```
 yarn add js-cookie
-```
-
-For snapshot testing:
-
-```bash
-yarn add react-test-renderer -D
-```
-
-Add script into `package.json` to run tests:
-
-```js
-"scripts": {
-  "dev": "next",
-  "test": "NODE_ENV=test jest"
-}
-```
-
-
-Specify Jest Jest global variables in `.eslintrc.json`:
-
-```js
-{
-  "env": {
-    "jest": true
-  },
-  "extends": "airbnb"
-}
-```
-
-`.babelrc`:
-
-```js
-{
-  "env": {
-    "development": {
-      "presets": ["next/babel"]
-    },
-    "production": {
-      "presets": ["next/babel"]
-    },
-    "test": {
-      "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]]
-    }
-  }
-}
-```
-
-## Material-UI
-
-Add material-ui for styled components to nextjs app
-
-```bash
-yarn add @material-ui/core
 ```
 
 ## Authentication

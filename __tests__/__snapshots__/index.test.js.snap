@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Snapshot Testing Index shows "Hello world!" 1`] = `
+<div>
+  <div
+    className="Header-root-2"
+  >
+    <header
+      className="MuiPaper-root-13 MuiPaper-elevation4-19 MuiAppBar-root-5 MuiAppBar-positionStatic-9 MuiAppBar-colorPrimary-11"
+    >
+      <div
+        className="SwipeArea-root-202 SwipeArea-anchorLeft-203"
+        style={
+          Object {
+            "width": 20,
+          }
+        }
+      />
+      <div
+        className="MuiToolbar-root-53 MuiToolbar-regular-55 MuiToolbar-gutters-54"
+      >
+        <button
+          aria-label="Menu"
+          className="MuiButtonBase-root-63 MuiIconButton-root-57 MuiIconButton-colorInherit-58 Header-menuButton-4"
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label-62"
+          >
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root-66"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root-73"
+          />
+        </button>
+        <h2
+          className="MuiTypography-root-80 MuiTypography-title-86 MuiTypography-colorInherit-99 Header-flex-3"
+        >
+          Home
+        </h2>
+      </div>
+    </header>
+  </div>
+  <div
+    style={
+      Object {
+        "padding": 12,
+      }
+    }
+  >
+    <div
+      className="MuiGrid-container-105 MuiGrid-spacing-xs-24-129"
+      style={
+        Object {
+          "padding": 24,
+        }
+      }
+    />
+  </div>
+</div>
+`;

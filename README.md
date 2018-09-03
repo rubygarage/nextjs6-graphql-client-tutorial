@@ -1591,47 +1591,121 @@ describe('Github Login Page', () => {
 });
 ```
 
-Start with atom
+#### Callback page
 
-`components/atoms/Loader/index.js`
+We need to implement callback page which will be used to obtain `access_token`.
+
+Install `isomorphic-unfetch` (Tiny 500b `fetch` "barely-polyfill"). We will use this package for authentication REST requests only.
+
+```bash
+yarn add isomorphic-unfetch
+```
+
+We need to store `access_token` on a client side using cookies. A simple, lightweight JavaScript API for handling cookies.
+
+```bash
+yarn add js-cookie
+```
+
+`pages/auth/github/callback.js`
 
 ```js
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Router, { withRouter } from 'next/router';
+import fetch from 'isomorphic-unfetch';
+import getConfig from 'next/config';
+import Cookies from 'js-cookie';
+import PropTypes from 'prop-types';
+import { GithubLogin } from '../../../components';
 
-const Loader = props => (
-  <CircularProgress {...props} />
-);
+class Callback extends React.Component {
+  static propTypes = {
+    errorMessage: PropTypes.string,
+    accessToken: PropTypes.string,
+  };
 
-export default Loader;
+  static defaultProps = {
+    errorMessage: undefined,
+    accessToken: undefined,
+  };
+
+  componentDidMount() {
+    const { accessToken } = this.props;
+
+    if (accessToken) {
+      Router.push('/');
+    }
+  }
+
+  static async getInitialProps({ query }) {
+    const { serverRuntimeConfig: { GithubClientId, GithubClientSecret } } = getConfig();
+
+    const bodyData = JSON.stringify({
+      client_id: GithubClientId,
+      client_secret: GithubClientSecret,
+      code: query.code,
+    });
+
+    const res = await fetch('https://github.com/login/oauth/access_token', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: bodyData,
+    });
+
+    const json = await res.json();
+    const errorMessage = json.error_description;
+    return { errorMessage, accessToken: json.access_token };
+  }
+
+  render() {
+    const { errorMessage, accessToken } = this.props;
+
+    if (errorMessage) {
+      return (
+        <GithubLogin error={errorMessage} />
+      );
+    }
+
+    Cookies.set('access_token', accessToken);
+
+    return null;
+  }
+}
+
+export default withRouter(Callback);
 ```
 
-`components/templates/GithubLogin/index.js`
+## GraphQL with Apollo
+
+Apollo Client is the best way to use GraphQL to build client applications. The client is designed to help you quickly build a UI that fetches data with GraphQL, and can be used with any JavaScript front-end.
+
+With Apollo’s declarative approach to data fetching, all of the logic for retrieving your data, tracking loading and error states, and updating your UI is encapsulated in a single Query component. This encapsulation makes composing your Query components with your presentational components a breeze! Let’s see what this looks like in practice with React Apollo.
+
+The simplest way to get started with Apollo Client is by using Apollo Boost. It's starter kit that configures your client for you with recommended settings.
+
+Let’s install packages:
+
+```bash
+yarn add apollo-boost react-apollo graphql
+```
+
+- `apollo-boost` Package containing everything you need to set up Apollo Client
+- `react-apollo` View layer integration for React
+- `graphql` Also parses your GraphQL queries
+
+Great, now that you have all the dependencies you need, let’s create your Apollo Client. The only thing you need to get started is the endpoint for your GraphQL server. If you don’t pass in uri directly, it defaults to the /graphql endpoint on the same host your app is served from.
+
+In our `_app.js` file, let’s import ApolloClient from apollo-boost and add the endpoint for Github GraphQL server to the uri property of the client config object.
+
+`pages/_app.js`
 
 ```js
-import React from 'react';
-import { Grid } from '@material-ui/core';
-import { HeaderWithMenu, Loader } from '../..';
-
-const GithubLogin = () => (
-  <div>
-    <HeaderWithMenu />
-    <div style={{ padding: 12 }}>
-      <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
-        <Loader size={500} />
-      </Grid>
-    </div>
-  </div>
-);
-
-export default GithubLogin;
-```
-
-`pages/auth/github/login.js`
-
-```js
 
 ```
+
 
 ## Draft (remove later)
 

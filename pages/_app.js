@@ -1,5 +1,7 @@
 import React from 'react';
 import App, { Container } from 'next/app';
+// import { ApolloProvider } from 'react-apollo';
+// import ApolloClient from 'apollo-boost';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
@@ -23,8 +25,15 @@ class MainApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
+
+    // const client = new ApolloClient({
+    //   uri: 'https://api.github.com/graphql',
+    //   headers: { authorization: `Bearer ${token}` },
+    // });
+
     return (
       <Container>
+        {/* <ApolloProvider client={client}> */}
         {/* Wrap every page in Jss and Theme providers */}
         <JssProvider
           registry={this.pageContext.sheetsRegistry}
@@ -43,6 +52,7 @@ class MainApp extends App {
             <Component pageContext={this.pageContext} {...pageProps} />
           </MuiThemeProvider>
         </JssProvider>
+        {/* </ApolloProvider> */}
       </Container>
     );
   }

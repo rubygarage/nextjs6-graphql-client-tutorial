@@ -17,6 +17,8 @@
   "dependencies": {
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
+    "isomorphic-unfetch": "^2.1.1",
+    "js-cookie": "^2.2.0",
     "jss": "^9.8.7",
     "next": "^6.1.1",
     "prop-types": "^15.6.2",

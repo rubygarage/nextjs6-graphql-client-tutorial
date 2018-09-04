@@ -19,8 +19,10 @@ class Callback extends React.Component {
 
   componentDidMount() {
     const { accessToken } = this.props;
+    console.log(accessToken);
 
     if (accessToken) {
+      Cookies.set('access_token', accessToken);
       Router.push('/');
     }
   }
@@ -49,7 +51,7 @@ class Callback extends React.Component {
   }
 
   render() {
-    const { errorMessage, accessToken } = this.props;
+    const { errorMessage } = this.props;
 
     if (errorMessage) {
       return (
@@ -57,9 +59,7 @@ class Callback extends React.Component {
       );
     }
 
-    Cookies.set('access_token', accessToken);
-
-    return null;
+    return <GithubLogin />;
   }
 }
 

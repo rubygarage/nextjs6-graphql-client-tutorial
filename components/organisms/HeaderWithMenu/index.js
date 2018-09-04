@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, SwipeableMenu } from '../..';
+import { Header, SwipeableMenu, GithubLoginButton } from '../..';
 
 class HeaderWithMenu extends React.Component {
   state = {
@@ -31,6 +31,9 @@ class HeaderWithMenu extends React.Component {
             openMenu={toggleLeftMenuShow(true)}
             menuItems={['Trending']}
           />
+        )}
+        loginButton={(
+          <GithubLoginButton>Login</GithubLoginButton>
         )}
       />
     );

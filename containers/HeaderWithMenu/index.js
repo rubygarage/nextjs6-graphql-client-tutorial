@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, SwipeableMenu, GithubLoginButton } from '../..';
+import { Header, SwipeableMenu } from 'components';
+import GithubLoginButton from 'containers/GithubLoginButton';
 
 class HeaderWithMenu extends React.Component {
   state = {
@@ -32,9 +33,7 @@ class HeaderWithMenu extends React.Component {
             menuItems={['Trending this month', 'Ruby repos']}
           />
         )}
-        loginButton={(
-          <GithubLoginButton>Login</GithubLoginButton>
-        )}
+        loginButton={<GithubLoginButton>Login</GithubLoginButton>}
       />
     );
   }

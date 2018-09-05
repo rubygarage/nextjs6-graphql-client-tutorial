@@ -22,7 +22,7 @@ const styles = {
 
 const Header = (props) => {
   const {
-    classes, swipeableMenu, loginButton, title, openMenu
+    classes, swipeableMenu, loginButton, title, openMenu,
   } = props;
 
   return (

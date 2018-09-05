@@ -4,7 +4,6 @@ import fetch from 'isomorphic-unfetch';
 import getConfig from 'next/config';
 import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
-import { GithubLogin } from '../../../components';
 
 class Callback extends React.Component {
   static propTypes = {
@@ -54,11 +53,11 @@ class Callback extends React.Component {
 
     if (errorMessage) {
       return (
-        <GithubLogin error={errorMessage} />
+        <p>{errorMessage}</p>
       );
     }
 
-    return <GithubLogin />;
+    return null;
   }
 }
 

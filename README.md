@@ -1730,7 +1730,7 @@ In our `_app.js` file, let’s import ApolloClient from apollo-boost and add the
 ```
 
 
-## Draft (remove later)
+## Draft (move to correct place if needed)
 
 Babel plugin resolver
 
@@ -1738,17 +1738,104 @@ Babel plugin resolver
 yarn add babel-plugin-module-resolver -D
 ```
 
+A Babel plugin to add a new resolver for your modules when compiling your code using Babel. This plugin allows you to add new "root" directories that contain your modules. It also allows you to setup a custom alias for directories, specific files, or even other npm modules.
+
+`.babelrc`
+
 ```js
 "plugins": [
   ["module-resolver", {
-    "root": ["."],
+    "root": ["./"],
     "alias": {
-      "components": "./components"
+      "components": "./components",
+      "containers": "./containers",
+      "queries": "./graphql/queries"
     }
   }]
 ]
 ```
 
+Eslint resolve for babel-plugin-module-resolver. (To avoid eslint errors).
+
+```bash
+yarn add eslint-import-resolver-babel-module -D
+```
+
+`eslintrc.json`
+
+```js
+"settings": {
+  "import/resolver": {
+    "node": {
+      "paths": ["./"]
+    },
+    "babel-module": {}
+  }
+},
+```
+
+## GraphQL
+
+All graphql queries will be in `graphql/queries` folder
+
+#### Viewer
+
+`graphql/queries/viewer.js`
+
+```js
+import gql from 'graphql-tag';
+
+const viewer = gql`
+{
+  viewer {
+    login,
+    avatarUrl
+  }
+}
+`;
+
+export default viewer;
+```
+
+#### ViewerLast100Repositories
+
+`graphql/queries/viewerLast100Repositories.js`
+
+```js
+import gql from 'graphql-tag';
+
+const viewerLast100Repositories = gql`
+{
+  viewer {
+    repositories(last:100) {
+      edges {
+        node {
+          id
+          name
+          description
+        }
+      }
+    }
+  }
+}
+`;
+
+export default viewerLast100Repositories;
+```
+
+## Containers
+
+If we need to implement some component with it's own state management or side effects (in other words smart component) we place it in `containers` folder. All components with graphql/REST requests will be there.
+
+#### Github Login Button
+
+`containers/GithubLoginButton/index.js`
+`containers/GithubLoginButton/index.test.js`
+
+#### Repo List
+
+`containers/ViewerRepoList/index.js`
+` containers/ViewerRepoList/index.test.js`
 
 Add fetch
 

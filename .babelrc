@@ -1,7 +1,15 @@
 {
   "env": {
     "development": {
-      "presets": ["next/babel"]
+      "presets": ["next/babel"],
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./"],
+          "alias": {
+            "components": "./components"
+          }
+        }]
+      ]
     },
     "production": {
       "presets": ["next/babel"]

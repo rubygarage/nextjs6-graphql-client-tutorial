@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home } from '../components';
+import { Home } from 'components';
 
 const Index = () => (
   <Home />

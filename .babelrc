@@ -6,7 +6,9 @@
         ["module-resolver", {
           "root": ["./"],
           "alias": {
-            "components": "./components"
+            "components": "./components",
+            "containers": "./containers",
+            "queries": "./graphql/queries"
           }
         }]
       ]

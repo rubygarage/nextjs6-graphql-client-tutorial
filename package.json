@@ -1,7 +1,7 @@
 {
   "name": "nextjs6-graphql-client-tutorial",
   "version": "0.1.0",
-  "description": "NextJS6 with apollo graphQL app",
+  "description": "NextJS6 with apollo GraphQL app",
   "main": "index.js",
   "repository": "git@github.com:leksster/nextjs6-graphql-client-tutorial.git",
   "author": "Alex Bykov <leksster@gmail.com>",
@@ -12,6 +12,9 @@
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
     "dev": "next",
+    "build": "next build",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build",
     "test": "jest"
   },
   "dependencies": {

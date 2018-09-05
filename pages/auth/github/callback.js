@@ -19,7 +19,6 @@ class Callback extends React.Component {
 
   componentDidMount() {
     const { accessToken } = this.props;
-    console.log(accessToken);
 
     if (accessToken) {
       Cookies.set('access_token', accessToken);

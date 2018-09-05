@@ -29,7 +29,7 @@ class HeaderWithMenu extends React.Component {
             isOpenedByDefault={leftMenuIsOpened}
             closeMenu={toggleLeftMenuShow(false)}
             openMenu={toggleLeftMenuShow(true)}
-            menuItems={['Trending']}
+            menuItems={['Trending this month', 'Ruby repos']}
           />
         )}
         loginButton={(

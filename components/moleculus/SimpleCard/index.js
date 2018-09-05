@@ -30,7 +30,7 @@ const SimpleCard = (props) => {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography variant="headline" component="h2">
+        <Typography variant="headline" component="h3">
           {title}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
@@ -47,7 +47,11 @@ const SimpleCard = (props) => {
 SimpleCard.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
+};
+
+SimpleCard.defaultProps = {
+  description: null,
 };
 
 export default withStyles(styles)(SimpleCard);

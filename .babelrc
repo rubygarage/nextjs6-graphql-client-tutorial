@@ -14,7 +14,17 @@
       ]
     },
     "production": {
-      "presets": ["next/babel"]
+      "presets": ["next/babel"],
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./"],
+          "alias": {
+            "components": "./components",
+            "containers": "./containers",
+            "queries": "./graphql/queries"
+          }
+        }]
+      ]
     },
     "test": {
       "presets": ["react", "env", "stage-0"],

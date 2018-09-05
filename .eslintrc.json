@@ -3,6 +3,14 @@
   "env": {
     "jest": true
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./"]
+      },
+      "babel-module": {}
+    }
+  },
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]

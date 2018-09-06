@@ -1,7 +1,6 @@
 import React from 'react';
 import Router, { withRouter } from 'next/router';
 import fetch from 'isomorphic-unfetch';
-import getConfig from 'next/config';
 import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 
@@ -26,11 +25,9 @@ class Callback extends React.Component {
   }
 
   static async getInitialProps({ query }) {
-    const { serverRuntimeConfig: { GithubClientId, GithubClientSecret } } = getConfig();
-
     const bodyData = JSON.stringify({
-      client_id: GithubClientId,
-      client_secret: GithubClientSecret,
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
       code: query.code,
     });
 

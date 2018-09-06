@@ -1,6 +1,5 @@
 import React from 'react';
 import Router from 'next/router';
-import getConfig from 'next/config';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import { Button } from 'components';
@@ -12,12 +11,10 @@ class GithubLoginButton extends React.Component {
   };
 
   handleSignIn = () => {
-    const { publicRuntimeConfig: { GithubClientId } } = getConfig();
-
     Router.push({
       pathname: 'https://github.com/login/oauth/authorize',
       query: {
-        client_id: GithubClientId,
+        client_id: process.env.GITHUB_CLIENT_ID,
       },
     });
   };

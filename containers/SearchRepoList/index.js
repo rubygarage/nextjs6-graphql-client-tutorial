@@ -1,12 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   SimpleCard, Loader, Grid, Typography,
 } from 'components';
 import { Query } from 'react-apollo';
-import viewerLast100Repositories from 'graphql/queries/viewerLast100Repositories';
 
-const ViewerRepoList = () => (
-  <Query query={viewerLast100Repositories}>
+const SearchRepoList = ({ query }) => (
+  <Query query={query}>
     {({ loading, error, data }) => {
       if (loading) {
         return (
@@ -24,7 +24,7 @@ const ViewerRepoList = () => (
       }
       return (
         <React.Fragment>
-          {data.viewer.repositories.edges.map(repo => (
+          {data.search.edges.map(repo => (
             <Grid key={repo.node.id} item xs={6} sm={4} lg={3} xl={2}>
               <SimpleCard
                 title={repo.node.name}
@@ -39,4 +39,8 @@ const ViewerRepoList = () => (
   </Query>
 );
 
-export default ViewerRepoList;
+SearchRepoList.propTypes = {
+  query: PropTypes.node.isRequired,
+};
+
+export default SearchRepoList;

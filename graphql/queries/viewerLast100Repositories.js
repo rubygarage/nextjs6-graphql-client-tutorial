@@ -9,6 +9,7 @@ const viewerLast100Repositories = gql`
           id
           name
           description
+          url
         }
       }
     }

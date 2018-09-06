@@ -21,6 +21,29 @@ class HeaderWithMenu extends React.Component {
       toggleLeftMenuShow,
     } = this;
 
+    const MENU_ITEMS = [
+      {
+        id: 1,
+        url: '/',
+        text: 'Home',
+      },
+      {
+        id: 2,
+        url: '/top_ruby',
+        text: 'Top Ruby Repositories',
+      },
+      {
+        id: 3,
+        url: '/top_js',
+        text: 'Top Javascript Repositories',
+      },
+      {
+        id: 4,
+        url: '/new_js',
+        text: 'New Javascript Repositories',
+      },
+    ];
+
     return (
       <Header
         openMenu={toggleLeftMenuShow(true)}
@@ -30,7 +53,7 @@ class HeaderWithMenu extends React.Component {
             isOpenedByDefault={leftMenuIsOpened}
             closeMenu={toggleLeftMenuShow(false)}
             openMenu={toggleLeftMenuShow(true)}
-            menuItems={['Trending this month', 'Ruby repos']}
+            menuItems={MENU_ITEMS}
           />
         )}
         loginButton={<GithubLoginButton />}

@@ -25,7 +25,7 @@ const styles = {
 };
 
 const SimpleCard = (props) => {
-  const { classes, title, description } = props;
+  const { classes, title, description, url } = props;
 
   return (
     <Card className={classes.card}>
@@ -38,7 +38,7 @@ const SimpleCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button target="_blank" href={url} size="small">Learn More</Button>
       </CardActions>
     </Card>
   );
@@ -48,10 +48,12 @@ SimpleCard.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
+  url: PropTypes.string,
 };
 
 SimpleCard.defaultProps = {
   description: 'No description',
+  url: null,
 };
 
 export default withStyles(styles)(SimpleCard);

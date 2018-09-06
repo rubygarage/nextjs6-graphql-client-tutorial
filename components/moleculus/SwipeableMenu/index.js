@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 import {
   List, ListItem, ListItemText, SwipeableDrawer,
@@ -18,9 +19,11 @@ const SwipeableMenu = (props) => {
     >
       <List>
         {menuItems.map(item => (
-          <ListItem key={item} button>
-            <ListItemText primary={item} />
-          </ListItem>
+          <Link href={item.url}>
+            <ListItem key={item.id} button>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </SwipeableDrawer>

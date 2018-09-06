@@ -1,43 +1,69 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Index from 'pages';
+import { mount } from 'enzyme';
 import viewerLast100Repositories from 'graphql/queries/viewerLast100Repositories';
 import { MockedProvider } from 'react-apollo/test-utils';
 
-const mocks = [
-  {
-    request: {
-      query: viewerLast100Repositories,
-      variables: {
-        name: 'Buck',
-      },
-    },
-    result: {
-      data: {
-        viewer: {
-          repositories: {
-            edges: [
-              { node: { id: '1' } },
-            ],
-          },
-        },
-      },
-    },
-  },
-];
-
 describe('Home Page', () => {
-  it('should render loading state initially', () => {
+  it('renders loading state initially', () => {
     const component = renderer.create(
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={[]} addTypename={false}>
         <Index />
       </MockedProvider>,
     );
 
     const tree = component.toJSON();
-    expect(tree.children).toContain('MuiCircularProgress-root-104');
-    // const component = renderer.create(<Index />);
-    // const tree = component.toJSON();
-    // expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders cards with all information on success', async () => {
+    const mocks = [
+      {
+        request: {
+          query: viewerLast100Repositories,
+        },
+        result: {
+          data: {
+            viewer: {
+              repositories: {
+                edges: [
+                  { node: { id: '1', name: 'repo name', description: 'desc' } },
+                ],
+              },
+            },
+          },
+        },
+      },
+    ];
+
+    const component = renderer.create(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Index />
+      </MockedProvider>,
+    );
+    await new Promise(resolve => setTimeout(resolve));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correct message on error', async () => {
+    const mock = {
+      request: {
+        query: viewerLast100Repositories,
+      },
+      error: new Error('error'),
+    };
+
+    const component = renderer.create(
+      <MockedProvider mocks={[mock]} addTypename={false}>
+        <Index />
+      </MockedProvider>,
+    );
+    await new Promise(resolve => setTimeout(resolve));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

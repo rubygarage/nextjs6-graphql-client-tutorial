@@ -9293,10 +9293,6 @@ w3c-hr-time@^1.0.1:
   dependencies:
     browser-process-hrtime "^0.1.2"
 
-waait@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/waait/-/waait-1.0.2.tgz#c234ed748a032cb7d5e83cb691567c6dc545b37d"
-
 walk@2.3.9:
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/walk/-/walk-2.3.9.tgz#31b4db6678f2ae01c39ea9fb8725a9031e558a7b"

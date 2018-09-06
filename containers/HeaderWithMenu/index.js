@@ -33,7 +33,7 @@ class HeaderWithMenu extends React.Component {
             menuItems={['Trending this month', 'Ruby repos']}
           />
         )}
-        loginButton={<GithubLoginButton>Login</GithubLoginButton>}
+        loginButton={<GithubLoginButton />}
       />
     );
   }

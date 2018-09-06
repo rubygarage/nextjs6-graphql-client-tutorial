@@ -14,7 +14,7 @@ class GithubLoginButton extends React.Component {
     Router.push({
       pathname: 'https://github.com/login/oauth/authorize',
       query: {
-        client_id: process.env.GITHUB_CLIENT_ID,
+        client_id: 'eb073f3a8b2728d085b2',
       },
     });
   };

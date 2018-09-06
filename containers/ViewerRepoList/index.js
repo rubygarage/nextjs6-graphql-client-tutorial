@@ -1,6 +1,7 @@
 import React from 'react';
-import { SimpleCard } from 'components';
-import { Grid } from '@material-ui/core';
+import {
+  SimpleCard, Loader, Grid, Typography,
+} from 'components';
 import { Query } from 'react-apollo';
 import viewerLast100Repositories from 'graphql/queries/viewerLast100Repositories';
 
@@ -11,18 +12,16 @@ class ViewerRepoList extends React.Component {
         {({ loading, error, data }) => {
           if (loading) {
             return (
-              <div>
-                <Grid item xs={6} sm={4} lg={3} xl={2}>
-                  Loading
-                </Grid>
-              </div>
+              <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
+                <Loader size={300} />
+              </Grid>
             );
           }
           if (error) {
             return (
-              <div>
-                Sign In Using github
-              </div>
+              <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
+                <Typography variant="headline">Please Sign In to fetch data</Typography>
+              </Grid>
             );
           }
           return (

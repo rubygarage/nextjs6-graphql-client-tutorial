@@ -1,15 +1,11 @@
 import React from 'react';
 import Router from 'next/router';
-import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { Button } from 'components';
+import { Button, Loader } from 'components';
+import Cookies from 'js-cookie';
 import viewer from 'graphql/queries/viewer';
 
 class GithubLoginButton extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  };
-
   handleSignIn = () => {
     Router.push({
       pathname: 'https://github.com/login/oauth/authorize',
@@ -19,29 +15,35 @@ class GithubLoginButton extends React.Component {
     });
   };
 
+  handleSignOut = () => {
+    Cookies.remove('access_token');
+    Router.push('/');
+  };
+
   render() {
-    const { props: { children }, handleSignIn } = this;
+    const { handleSignIn, handleSignOut } = this;
 
     return (
       <Query query={viewer}>
         {({ loading, error, data }) => {
           if (loading) {
             return (
-              <div>
-                Loading
-              </div>
+              <Loader color="secondary" />
             );
           }
           if (error) {
             return (
               <Button color="secondary" onClick={handleSignIn}>
-                { children }
+                Sign In
               </Button>
             );
           }
           return (
             <>
               {data.viewer.login}
+              <Button color="secondary" onClick={handleSignOut}>
+                Sign Out
+              </Button>
             </>
           );
         }}

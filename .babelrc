@@ -21,6 +21,7 @@
           "alias": {
             "components": "./components",
             "containers": "./containers",
+            "pages": "./pages",
             "queries": "./graphql/queries"
           }
         }]
@@ -29,7 +30,16 @@
     "test": {
       "presets": ["react", "env", "stage-0"],
       "plugins": [
-        "require-context-hook"
+        "require-context-hook",
+        ["module-resolver", {
+          "root": ["./"],
+          "alias": {
+            "components": "./components",
+            "containers": "./containers",
+            "pages": "./pages",
+            "queries": "./graphql/queries"
+          }
+        }]
       ]
     }
   }

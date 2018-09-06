@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { GithubLoginButton } from 'containers';
+import GithubLoginButton from 'containers/GithubLoginButton';
 
 jest.mock('next/config', () => () => ({ publicRuntimeConfig: { GithubClientId: '123' } }));
 

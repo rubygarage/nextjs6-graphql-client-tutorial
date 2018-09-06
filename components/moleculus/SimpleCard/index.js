@@ -51,7 +51,7 @@ SimpleCard.propTypes = {
 };
 
 SimpleCard.defaultProps = {
-  description: null,
+  description: 'No description',
 };
 
 export default withStyles(styles)(SimpleCard);

@@ -39,12 +39,12 @@ class GithubLoginButton extends React.Component {
             );
           }
           return (
-            <>
+            <React.Fragment>
               {data.viewer.login}
               <Button color="secondary" onClick={handleSignOut}>
                 Sign Out
               </Button>
-            </>
+            </React.Fragment>
           );
         }}
       </Query>

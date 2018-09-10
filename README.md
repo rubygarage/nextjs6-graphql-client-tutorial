@@ -40,7 +40,7 @@ yarn dev
 
 When you run `localhost:3000` you're gonna see this page:
 
-![404](1.png "404 Page screenshot")
+![404](public/images/nextjs-404.png "404 Page screenshot")
 
 ## Babel
 

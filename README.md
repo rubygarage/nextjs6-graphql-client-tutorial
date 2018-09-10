@@ -1,6 +1,6 @@
 # Nextjs6 with Apollo Graphql and Material-UI Tutorial
 
-## Install Yarn
+## Step 1 - Yarn installation
 
 The first method would be to use npm
 
@@ -10,7 +10,7 @@ npm install -g yarn
 
 The other method would be to go to the official download page https://yarnpkg.com/en/docs/install and get the installer for your operating system and run it.
 
-## Initialize project
+## Step 2 - Project initialization
 
 To start, create a sample project by running the following commands:
 
@@ -42,15 +42,17 @@ When you run `localhost:3000` you're gonna see this page:
 
 ![404](public/images/nextjs-404.png "404 Page screenshot")
 
-## Babel
+## Step 3 - Babel Installation
 
 Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript in old browsers or environments.
+
+To install babel compiler core use command:
 
 ```bash
 yarn add babel-core -D
 ```
 
-## Linters
+## Step 4 Linters configuration
 
 Let's integrate linters to our app to avoid big refactoring in the future.
 
@@ -60,11 +62,15 @@ Add eslint as development dependency
 yarn add eslint -D
 ```
 
-babel-eslint allows you to lint ALL valid Babel code
+We need a wrapper for babel’s parser used for eslint
+
+Use yarn to install the package:
 
 ```bash
 yarn add babel-eslint -D
 ```
+
+Babel-eslint allows you to lint ALL valid Babel code
 
 We're gonna use airbnb eslint config. There are few dependencies that are needed to be installed.
 
@@ -74,13 +80,13 @@ This package provides Airbnb's .eslintrc as an extensible shared config
 yarn add eslint-config-airbnb -D
 ```
 
-ESLint plugin with rules that help validate proper imports
+Install ESLint plugin with rules that help validate proper imports
 
 ```bash
 yarn add eslint-plugin-import -D
 ```
 
-Static AST checker for accessibility rules on JSX elements.
+Install Static AST checker for accessibility rules on JSX elements.
 
 ```bash
 yarn add eslint-plugin-jsx-a11y -D
@@ -97,6 +103,8 @@ Initialize eslint config
 ```bash
 yarn run eslint --init
 ```
+
+Choose the following settings:
 
 How would you like to configure ESLint? `Use a popular style guide`
 
@@ -116,7 +124,7 @@ Now we have `.eslintrc.json` with the following configuration
 }
 ```
 
-We're gonna use `.js` extensions instead of `.jsx`. So we explicitly add this option to the `.eslintc.json`:
+We're gonna use `.js` extensions instead of `.jsx` because JSX is not standard JS, and is not likely to ever be. So we explicitly add this option to the `.eslintc.json`:
 
 ```js
 {
@@ -128,17 +136,25 @@ We're gonna use `.js` extensions instead of `.jsx`. So we explicitly add this op
 }
 ```
 
-## Material
+## Step 4 - Material UI integration
 
-We're gonna use material-ui library for styling. It's React components that implement Google's Material Design.
+In a nutshell, Material-UI is an open-source project that features React components that implement Google’s Material Design.
 
-First of all we need to install some additional libraries:
+It kick-started in 2014, not long after React came out to the public, and has grown in popularity ever since. With over 35,000 stars on GitHub, Material-UI is one of the top user interface libraries for React out there.
+
+There are few additional steps that we need to apply before start using material with NextJS framework
+
+First of all install some additional packages.
+
+#### Install JSS:
 
 ```
 yarn add jss
 ```
 
 JSS is a more powerful abstraction over CSS. It uses JavaScript as a language to describe styles in a declarative and maintainable way. It is a high performance JS to CSS compiler which works at runtime and server-side.
+
+#### Install react-jss:
 
 ```
 yarn add react-jss
@@ -155,15 +171,22 @@ Benefits compared to lower level core:
 - A Style Sheet gets shared between all elements.
 - Function values and rules are updated automatically with props.
 
+#### Install styled-jsx package for server-side rendering:
+
 ```
 yarn add styled-jsx
 ```
 
-Full, scoped and component-friendly CSS support for JSX (rendered on the server or the client).
+Styled-jsx is a full, scoped and component-friendly CSS support for JSX (rendered on the server or the client).
+
+#### Install material core with icons
 
 ```
 yarn add @material-ui/core @material-ui/icons
 ```
+
+@material-ui/core is a set of react components that implement Google's Material Design.
+@materail-ui/icons is a set of components with svg icons
 
 There is an example app that shows how to properly integrate material-ui specifically for nextjs framework. https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 
@@ -375,7 +398,7 @@ export default MainDocument;
 
 Now we're ready to implement some pages with components.
 
-## Storybook
+## Step 5 Storybook Integration
 
 Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
 
@@ -506,7 +529,7 @@ This is possible because all components are dynamically exported on `components/
 
 Let's create our first atom - material Button.
 
-## Atoms
+## Step 6 - Create Atoms
 
 Atoms are the basic building blocks of matter. Applied to web interfaces, atoms are our HTML tags, such as a form label, an input or a button.
 
@@ -586,9 +609,9 @@ yarn storybook
 
 Then we will see this:
 
-![StoryBook](2.png "Storybook screenshot")
+![StoryBook](public/images/storybook-initial.png "Storybook screenshot")
 
-## Add jest for testing
+## Step 7 - Add jest for testing
 
 Add jest as development dependency
 
@@ -942,7 +965,7 @@ We're gonna create few more atoms using same approach:
 - Toolbar
 - Typography
 
-## Moleculus
+## Step 8 - Creating Moleculus
 
 Molecules are groups of two or more atoms held together by chemical bonds. These combinations of atoms take on their own unique properties, and become more tangible and operational than atoms.
 
@@ -1225,7 +1248,7 @@ describe('SimpleCard', () => {
 });
 ```
 
-## Organisms
+## Step 9 - Creating Organisms
 
 Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
 
@@ -1314,7 +1337,7 @@ describe('HeaderWithMenu', () => {
 });
 ```
 
-## Templates
+## Step 10 - Creating Templates
 
 Templates are page-level objects that place components into a layout and articulate the design’s underlying content structure. To build on our previous example, we can take the HeaderWithMenu organism and apply it to a home template.
 
@@ -1424,7 +1447,7 @@ describe('Home', () => {
 });
 ```
 
-## Pages
+## Step 11 - Pages
 
 Now we can use nextjs pages as an entry point
 

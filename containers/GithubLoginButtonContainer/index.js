@@ -5,7 +5,7 @@ import { Button, Loader } from 'components';
 import Cookies from 'js-cookie';
 import viewer from 'graphql/queries/viewer';
 
-class GithubLoginButton extends React.Component {
+class GithubLoginButtonContainer extends React.Component {
   handleSignIn = () => {
     Router.push({
       pathname: 'https://github.com/login/oauth/authorize',
@@ -52,4 +52,4 @@ class GithubLoginButton extends React.Component {
   }
 }
 
-export default GithubLoginButton;
+export default GithubLoginButtonContainer;

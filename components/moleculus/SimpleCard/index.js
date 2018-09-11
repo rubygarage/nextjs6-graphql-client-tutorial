@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import {
   Card, CardContent, Typography, CardActions, Button,
-} from '../..';
+} from 'components';
 
 const styles = {
   card: {
@@ -25,7 +25,9 @@ const styles = {
 };
 
 const SimpleCard = (props) => {
-  const { classes, title, description, url } = props;
+  const {
+    classes, title, description, url,
+  } = props;
 
   return (
     <Card className={classes.card}>

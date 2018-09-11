@@ -1016,84 +1016,100 @@ Building up to molecules from atoms encourages a “do one thing and do it well�
 
 #### SideBarMenu Molecule
 
-Now we gonna create first moleculue component. It will be Sidebar Menu which will consist of atoms.
+Now we gonna create first moleculue component. It will be SimpleCard which will consist of atoms.
 
-`components/moleculus/SideBarMenu/index.js`
+`components/moleculus/SimpleCard/index.js`
 
 ```js
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 import {
-  List, ListItem, ListItemText,
-} from '../..';
+  Card, CardContent, Typography, CardActions, Button,
+} from 'components';
 
-const SideBarMenu = (props) => {
-  const { menuItems } = props;
+const styles = {
+  card: {
+    minWidth: 100,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    marginBottom: 16,
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+};
+
+const SimpleCard = (props) => {
+  const {
+    classes, title, description, url,
+  } = props;
 
   return (
-    <List>
-      {menuItems.map(item => (
-        <ListItem key={item} button>
-          <ListItemText primary={item} />
-        </ListItem>
-      ))}
-    </List>
+    <Card className={classes.card}>
+      <CardContent>
+        <Typography variant="headline" component="h3">
+          {title}
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          {description}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button target="_blank" href={url} size="small">Learn More</Button>
+      </CardActions>
+    </Card>
   );
 };
 
-SideBarMenu.propTypes = {
-  menuItems: PropTypes.arrayOf(PropTypes.string).isRequired,
+SimpleCard.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  url: PropTypes.string,
 };
 
-export default SideBarMenu;
+SimpleCard.defaultProps = {
+  description: 'No description',
+  url: null,
+};
+
+export default withStyles(styles)(SimpleCard);
 ```
 
-`components/moleculus/SideBarMenu/index.stories.js`
+`components/moleculus/SimpleCard/index.stories.js`
 
 ```js
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { SideBarMenu } from '../..';
+import { SimpleCard } from '../..';
 
-storiesOfoleculus/SideBarMenu', module)
+storiesOf('moleculus/SimpleCard', module)
   .add('default', () => (
-    <SideBarMenu menuItems={['First', 'Second', 'Third']} />
+    <SimpleCard title="Default title" description="Default description" />
   ));
 ```
 
-`components/moleculus/SideBarMenu/index.test.js`
+`components/moleculus/SimpleCard/index.test.js`
 
 ```js
 import React from 'react';
-import { shallow } from 'enzyme';
-import SideBarMenu from '.';
-import { ListItem, ListItemText, SwipeableDrawer } from '../..';
+import { mount } from 'enzyme';
+import { SimpleCard, Typography } from '../..';
 
-describe('SideBarMenu', () => {
-  it('renders correct menu items using array of strings as props', () => {
-    const mockedOpenMenu = jest.fn();
-    mockedOpenMenu.mockReturnValueOnce(true);
-
-    const mockedCloseMenu = jest.fn();
-    mockedCloseMenu.mockReturnValueOnce(true);
-
-    const wrapper = shallow(
-      <SideBarMenu
-        menuItems={['foo', 'bar', 'baz']}
-        openMenu={mockedOpenMenu}
-        closeMenu={mockedCloseMenu}
-      />,
-    );
-
-    expect(wrapper.find(ListItem)).toHaveLength(3);
-
-    const swipeableDrawer = wrapper.find(SwipeableDrawer);
-    expect(swipeableDrawer.props().onClose()).toEqual(true);
-    expect(swipeableDrawer.props().onOpen()).toEqual(true);
-
-    const props = wrapper.find(ListItemText).map(node => node.props().primary);
-    expect(props).toEqual(['foo', 'bar', 'baz']);
+describe('SimpleCard', () => {
+  it('renders header with correct title', () => {
+    const wrapper = mount(<SimpleCard title="foo" description="bar" />);
+    const typographyNodes = wrapper.find(Typography);
+    expect(typographyNodes.first().text()).toEqual('foo');
+    expect(typographyNodes.last().text()).toEqual('bar');
   });
 });
 ```
@@ -1127,7 +1143,7 @@ const styles = {
 
 const Header = (props) => {
   const {
-    classes, swipeableMenu, loginButton, title,
+    classes, swipeableMenu, loginButton, title, openMenu,
   } = props;
 
   return (
@@ -1135,7 +1151,7 @@ const Header = (props) => {
       <AppBar position="static">
         {swipeableMenu}
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          <IconButton onClick={openMenu} className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
@@ -1151,14 +1167,16 @@ const Header = (props) => {
 Header.propTypes = {
   swipeableMenu: PropTypes.node,
   loginButton: PropTypes.node,
-  classes: PropTypes.node.isRequired,
+  classes: PropTypes.shape().isRequired,
   title: PropTypes.string,
+  openMenu: PropTypes.func,
 };
 
 Header.defaultProps = {
   swipeableMenu: null,
   loginButton: null,
   title: null,
+  openMenu: null,
 };
 
 export default withStyles(styles)(Header);
@@ -1197,96 +1215,6 @@ describe('Header', () => {
 });
 ```
 
-#### SimpleCard molecule
-
-`index.js`
-
-```js
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-
-import {
-  Card, CardContent, Typography, CardActions, Button,
-} from '../..';
-
-const styles = {
-  card: {
-    minWidth: 100,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    marginBottom: 16,
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
-
-const SimpleCard = (props) => {
-  const { classes, title, description } = props;
-
-  return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Typography variant="headline" component="h2">
-          {title}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  );
-};
-
-SimpleCard.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};
-
-export default withStyles(styles)(SimpleCard);
-```
-
-`index.stories.js`
-
-```js
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { SimpleCard } from '../..';
-
-storiesOf('moleculus/SimpleCard', module)
-  .add('default', () => (
-    <SimpleCard title="Default title" description="Default description" />
-  ));
-```
-
-`index.test.js`
-
-```js
-import React from 'react';
-import { mount } from 'enzyme';
-import { SimpleCard, Typography } from '../..';
-
-describe('SimpleCard', () => {
-  it('renders header with correct title', () => {
-    const wrapper = mount(<SimpleCard title="foo" description="bar" />);
-    const typographyNodes = wrapper.find(Typography);
-    expect(typographyNodes.first().text()).toEqual('foo');
-    expect(typographyNodes.last().text()).toEqual('bar');
-  });
-});
-```
-
 ## Step 9 - Creating Organisms
 
 Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
@@ -1299,79 +1227,119 @@ Building up from molecules to organisms encourages creating standalone, portable
 
 #### Header with swipeable menu organism
 
-`components/organisms/HeaderWithMenu/index.js`
+`components/organisms/HeaderWithSwipeableMenu/index.js`
 
 ```js
 import React from 'react';
-import { Header, SwipeableMenu } from '../..';
+import PropTypes from 'prop-types';
+import { Header, SwipeableMenu } from 'components';
 
-class HeaderWithMenu extends React.Component {
-  state = {
-    leftMenuIsOpened: false,
-  };
+const HeaderWithSwipeableMenu = (props) => {
+  const {
+    closeMenu, openMenu, loginButtonContainer, leftMenuIsOpened,
+  } = props;
 
-  toggleLeftMenuShow = leftMenuIsOpened => () => {
-    this.setState({
-      leftMenuIsOpened,
-    });
-  };
+  const MENU_ITEMS = [
+    {
+      id: 1,
+      url: '/',
+      text: 'Home',
+    },
+    {
+      id: 2,
+      url: '/top_ruby',
+      text: 'Top Ruby Repositories',
+    },
+    {
+      id: 3,
+      url: '/top_js',
+      text: 'Top Javascript Repositories',
+    },
+    {
+      id: 4,
+      url: '/new_js',
+      text: 'New Javascript Repositories',
+    },
+  ];
 
-  render() {
-    const {
-      state: {
-        leftMenuIsOpened,
-      },
-      toggleLeftMenuShow,
-    } = this;
+  return (
+    <Header
+      openMenu={openMenu}
+      title="Home"
+      swipeableMenu={(
+        <SwipeableMenu
+          isOpenedByDefault={leftMenuIsOpened}
+          closeMenu={closeMenu}
+          openMenu={openMenu}
+          menuItems={MENU_ITEMS}
+        />
+      )}
+      loginButton={loginButtonContainer}
+    />
+  );
+};
 
-    return (
-      <Header
-        openMenu={toggleLeftMenuShow(true)}
-        title="Home"
-        swipeableMenu={(
-          <SwipeableMenu
-            isOpenedByDefault={leftMenuIsOpened}
-            closeMenu={toggleLeftMenuShow(false)}
-            openMenu={toggleLeftMenuShow(true)}
-            menuItems={['Trending']}
-          />
-        )}
-      />
-    );
-  }
-}
+HeaderWithSwipeableMenu.propTypes = {
+  leftMenuIsOpened: PropTypes.bool.isRequired,
+  openMenu: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
+  loginButtonContainer: PropTypes.node.isRequired,
+};
 
-export default HeaderWithMenu;
+export default HeaderWithSwipeableMenu;
 ```
 
-`components/organisms/HeaderWithMenu/index.stories.js`
+`components/organisms/HeaderWithSwipeableMenu/index.stories.js`
 
 ```js
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { HeaderWithMenu } from '../..';
+import { HeaderWithSwipeableMenu } from 'components';
+import { action } from '@storybook/addon-actions';
 
-storiesOf('organisms/HeaderWithMenu', module)
-  .add('default', () => (
-    <HeaderWithMenu />
+storiesOf('organisms/HeaderWithSwipeableMenu', module)
+  .add('default with click event', () => (
+    <HeaderWithSwipeableMenu openMenu={action('open')} />
+  ))
+  .add('opened by default', () => (
+    <HeaderWithSwipeableMenu leftMenuIsOpened />
   ));
 ```
 
-`components/organisms/HeaderWithMenu/index.test.js`
+`components/organisms/HeaderWithSwipeableMenu/index.test.js`
 
 ```js
 import React from 'react';
-import { shallow } from 'enzyme';
-import { HeaderWithMenu } from '../..';
+import { mount } from 'enzyme';
+import { HeaderWithSwipeableMenu } from 'components';
 
-describe('HeaderWithMenu', () => {
-  it('renders component', () => {
-    const wrapper = shallow(<HeaderWithMenu />);
+describe('HeaderWithSwipeableMenu', () => {
+  it('renders header with swipeable menu', () => {
+    const mockedOpenMenu = jest.fn();
+    const mockedCloseMenu = jest.fn();
 
-    const header = wrapper.find(Header);
-    expect(header).toHaveLength(1);
-    expect(header.props().title).toEqual('Home');
-    expect(header.props().swipeableMenu).toBeDefined();
+    const wrapper = mount(
+      <HeaderWithSwipeableMenu
+        leftMenuIsOpened
+        openMenu={mockedOpenMenu}
+        closeMenu={mockedCloseMenu}
+        loginButtonContainer={<React.Fragment />}
+      />,
+    );
+
+    const expectedMenuItems = [
+      'Top Javascript Repositories',
+      'Home',
+      'Top Ruby Repositories',
+      'New Javascript Repositories',
+    ];
+
+    wrapper.find('ListItemText').find('Typography').forEach((node) => {
+      expect(expectedMenuItems).toContain(node.text());
+    });
+
+    wrapper.find('button').simulate('click');
+    expect(mockedOpenMenu).toHaveBeenCalled();
   });
 });
 ```
@@ -1386,65 +1354,45 @@ Another important characteristic of templates is that they focus on the page’s
 
 #### Home template
 
-`index.js`
+`components/templates/Home/index.js`
 
 ```js
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import Router from 'next/router';
 
-import {
-  HeaderWithMenu, SimpleCard,
-} from '../..';
+const Home = (props) => {
+  const { header, footer, content } = props;
 
-const styles = {
-  container: {
-    'overflow-x': 'hidden',
-  },
+  return (
+    <div>
+      {header}
+      <div style={{ padding: 12 }}>
+        <Grid container spacing={24} style={{ padding: 24 }}>
+          {content}
+        </Grid>
+      </div>
+      {footer}
+    </div>
+  );
 };
 
-class Home extends React.PureComponent {
-  static propTypes = {
-    classes: PropTypes.shape({}).isRequired,
-    cards: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-    })),
-  };
+Home.propTypes = {
+  header: PropTypes.node,
+  content: PropTypes.node,
+  footer: PropTypes.string,
+};
 
-  static defaultProps = {
-    cards: [],
-  };
+Home.defaultProps = {
+  header: null,
+  content: null,
+  footer: null,
+};
 
-  render() {
-    const { props: { cards } } = this;
-
-    return (
-      <div>
-        <HeaderWithMenu />
-        <div style={{ padding: 12 }}>
-          <Grid container spacing={24} style={{ padding: 24 }}>
-            {cards.map(card => (
-              <Grid key={card.title} item xs={6} sm={4} lg={3} xl={2}>
-                <SimpleCard
-                  title={card.title}
-                  description={card.description}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default withStyles(styles)(Home);
+export default (Home);
 ```
 
-`index.stories.js`
+`components/templates/Home/index.stories.js`
 
 ```js
 import React from 'react';
@@ -1463,7 +1411,7 @@ storiesOf('templates/Home', module)
   ));
 ```
 
-`index.test.js`
+`components/templates/Home/index.test.js`
 
 ```js
 import React from 'react';
@@ -1471,12 +1419,12 @@ import { mount } from 'enzyme';
 import { Home, SimpleCard } from '../..';
 
 describe('Home', () => {
-  it('renders component', () => {
+  it('renders component with passed card components', () => {
     const wrapper = mount(
       <Home
-        cards={[
-          { title: '1', description: 'first' },
-          { title: '2', description: 'second' },
+        content={[
+          <SimpleCard description="desc" title="title1" key={1} />,
+          <SimpleCard description="desc" title="title2" key={2} />,
         ]}
       />,
     );
@@ -1490,14 +1438,19 @@ describe('Home', () => {
 
 Now we can use nextjs pages as an entry point
 
-`index.js`
+`pages/index.js`
 
 ```js
 import React from 'react';
-import { Home } from '../components';
+import { Home } from 'components';
+import HeaderContainer from 'containers/HeaderContainer';
+import ViewerRepoList from 'containers/ViewerRepoList';
 
 const Index = () => (
-  <Home />
+  <Home
+    header={<HeaderContainer />}
+    content={<ViewerRepoList />}
+  />
 );
 
 export default Index;
@@ -1526,11 +1479,69 @@ This package provides a React renderer that can be used to render React componen
 ```js
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Index from '../pages';
+import Index from 'pages';
+import { mount } from 'enzyme';
+import viewerLast100Repositories from 'graphql/queries/viewerLast100Repositories';
+import { MockedProvider } from 'react-apollo/test-utils';
 
 describe('Home Page', () => {
-  it('matches snapshot', () => {
-    const component = renderer.create(<Index />);
+  it('renders loading state initially', () => {
+    const component = renderer.create(
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Index />
+      </MockedProvider>,
+    );
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders cards with all information on success', async () => {
+    const mocks = [
+      {
+        request: {
+          query: viewerLast100Repositories,
+        },
+        result: {
+          data: {
+            viewer: {
+              repositories: {
+                edges: [
+                  { node: { id: '1', name: 'repo name', description: 'desc' } },
+                ],
+              },
+            },
+          },
+        },
+      },
+    ];
+
+    const component = renderer.create(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Index />
+      </MockedProvider>,
+    );
+    await new Promise(resolve => setTimeout(resolve));
+
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders correct message on error', async () => {
+    const mock = {
+      request: {
+        query: viewerLast100Repositories,
+      },
+      error: new Error('error'),
+    };
+
+    const component = renderer.create(
+      <MockedProvider mocks={[mock]} addTypename={false}>
+        <Index />
+      </MockedProvider>,
+    );
+    await new Promise(resolve => setTimeout(resolve));
+
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

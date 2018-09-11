@@ -19,8 +19,8 @@ const SwipeableMenu = (props) => {
     >
       <List>
         {menuItems.map(item => (
-          <Link href={item.url}>
-            <ListItem key={item.id} button>
+          <Link key={item.id} href={item.url}>
+            <ListItem button>
               <ListItemText primary={item.text} />
             </ListItem>
           </Link>
@@ -31,7 +31,7 @@ const SwipeableMenu = (props) => {
 };
 
 SwipeableMenu.propTypes = {
-  menuItems: PropTypes.arrayOf(PropTypes.string).isRequired,
+  menuItems: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   openMenu: PropTypes.func.isRequired,
   closeMenu: PropTypes.func.isRequired,
   isOpenedByDefault: PropTypes.bool,

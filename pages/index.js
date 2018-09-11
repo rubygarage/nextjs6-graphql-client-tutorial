@@ -1,11 +1,11 @@
 import React from 'react';
 import { Home } from 'components';
-import HeaderWithMenu from 'containers/HeaderWithMenu';
+import HeaderContainer from 'containers/HeaderContainer';
 import ViewerRepoList from 'containers/ViewerRepoList';
 
 const Index = () => (
   <Home
-    header={<HeaderWithMenu />}
+    header={<HeaderContainer />}
     content={<ViewerRepoList />}
   />
 );

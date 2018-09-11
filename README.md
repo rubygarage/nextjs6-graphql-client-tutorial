@@ -52,6 +52,45 @@ To install babel compiler core use command:
 yarn add babel-core -D
 ```
 
+#### Babel module resolver
+
+A Babel plugin to add a new resolver for your modules when compiling your code using Babel. This plugin allows you to add new "root" directories that contain your modules. It also allows you to setup a custom alias for directories, specific files, or even other npm modules.
+
+Let's install babel module resolver.
+
+```bash
+yarn add babel-plugin-module-resolver -D
+```
+
+After that we need to update `.babelrc` config. So we can import dependencies without declaring related path.
+
+`.babelrc`
+
+```js
+"plugins": [
+  ["module-resolver", {
+    "root": ["./"],
+    "alias": {
+      "components": "./components",
+      "containers": "./containers",
+      "queries": "./graphql/queries"
+    }
+  }]
+]
+```
+
+This allows us to make this:
+
+```js
+import { Home } from 'components';
+```
+
+Instead of this:
+
+```js
+import { Home } from '../../components';
+```
+
 ## Step 4 Linters configuration
 
 Let's integrate linters to our app to avoid big refactoring in the future.
@@ -1712,23 +1751,163 @@ The simplest way to get started with Apollo Client is by using Apollo Boost. It'
 Let’s install packages:
 
 ```bash
-yarn add apollo-boost react-apollo graphql
+yarn add apollo-boost react-apollo graphql graphql-tag
 ```
 
 - `apollo-boost` Package containing everything you need to set up Apollo Client
 - `react-apollo` View layer integration for React
 - `graphql` Also parses your GraphQL queries
+- `graphql-tag` Provides template literal tag you can use to concisely write a GraphQL query that is parsed into the standard GraphQL AST
 
 Great, now that you have all the dependencies you need, let’s create your Apollo Client. The only thing you need to get started is the endpoint for your GraphQL server. If you don’t pass in uri directly, it defaults to the /graphql endpoint on the same host your app is served from.
 
-In our `_app.js` file, let’s import ApolloClient from apollo-boost and add the endpoint for Github GraphQL server to the uri property of the client config object.
+#### GraphQL authentication
+
+Apollo Client uses the ultra flexible Apollo Link that includes several options for authentication.
+
+We will use cookies for storing github access_token and send it as an authorization header. It’s easy to add an authorization header to every HTTP request by adding `headers` to ApolloClient.
+
+It’s very easy to tell your network interface to send the cookie along with every request. You just need to pass the headers option. e.g. `headers: 'token'`
+
+In this example, we’ll pull the login token from cookies every time a request is sent:
 
 `pages/_app.js`
 
 ```js
+const token = Cookies.get('access_token');
 
+const client = new ApolloClient({
+  uri: 'https://api.github.com/graphql',
+  headers: { authorization: `Bearer ${token}` },
+});
+
+class MainApp extends App {
+  // ...
+  render() {
+    // ...
+    const token = Cookies.get('access_token');
+
+    const client = new ApolloClient({
+      uri: 'https://api.github.com/graphql',
+      headers: { authorization: `Bearer ${token}` },
+    });
+
+    return (
+      <Container>
+        <ApolloProvider client={client}>
+          {/* ... */}
+        </ApolloProvider>
+      </Container>
+    );
+  }
+}
 ```
 
+After that we can make requests to Github API using our token from cookies.
+
+#### GraphQL queries
+
+Let's implement our first graphql query
+
+This query finds last 50 repositories with more than 10000 stars
+
+`queries/searchTopRubyRepos.js`
+
+```js
+import gql from 'graphql-tag';
+
+const searchTopRubyRepos = gql`
+{
+  search(query: "language:Ruby stars:>10000", first: 50, type: REPOSITORY) {
+    edges {
+      node {
+        ... on Repository {
+          name
+          description
+          url
+        }
+      }
+    }
+  }
+}
+`;
+
+export default searchTopRubyRepos;
+```
+
+It's good practice to extract "smart" components to `containers` folder.
+
+We can use graphql queries in our containers using `react-apollo` Query component.
+
+`containers/SearchRepoList/index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  SimpleCard, Loader, Grid, Typography,
+} from 'components';
+import { Query } from 'react-apollo';
+
+const SearchRepoList = ({ query }) => (
+  <Query query={query}>
+    {({ loading, error, data }) => {
+      if (loading) {
+        return (
+          <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
+            <Loader size={300} />
+          </Grid>
+        );
+      }
+      if (error) {
+        return (
+          <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
+            <Typography variant="headline">Please Sign In to fetch data</Typography>
+          </Grid>
+        );
+      }
+      return (
+        <React.Fragment>
+          {data.search.edges.map(repo => (
+            <Grid key={repo.node.id} item xs={6} sm={4} lg={3} xl={2}>
+              <SimpleCard
+                title={repo.node.name}
+                description={repo.node.description}
+                url={repo.node.url}
+              />
+            </Grid>
+          ))}
+        </React.Fragment>
+      );
+    }}
+  </Query>
+);
+
+SearchRepoList.propTypes = {
+  query: PropTypes.node.isRequired,
+};
+
+export default SearchRepoList;
+```
+
+Now let's implement nextjs page
+
+```js
+import React from 'react';
+import { Home } from 'components';
+import HeaderWithMenu from 'containers/HeaderWithMenu';
+import SearchRepoList from 'containers/SearchRepoList';
+import searchTopRubyRepos from 'graphql/queries/searchTopRubyRepos';
+
+const TopRuby = () => (
+  <Home
+    header={<HeaderWithMenu />}
+    content={<SearchRepoList query={searchTopRubyRepos} />}
+  />
+);
+
+export default TopRuby;
+```
 
 ## Draft (move to correct place if needed)
 

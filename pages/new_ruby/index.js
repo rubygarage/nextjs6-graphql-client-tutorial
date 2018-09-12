@@ -1,12 +1,12 @@
 import React from 'react';
 import { Home } from 'components';
-import HeaderWithMenu from 'containers/HeaderWithMenu';
+import HeaderContainer from 'containers/HeaderContainer';
 import SearchRepoList from 'containers/SearchRepoList';
 import searchNewRubyRepos from 'graphql/queries/searchNewRubyRepos';
 
 const NewRuby = () => (
   <Home
-    header={<HeaderWithMenu />}
+    header={<HeaderContainer title="New Ruby Repositories" />}
     content={<SearchRepoList query={searchNewRubyRepos} />}
   />
 );

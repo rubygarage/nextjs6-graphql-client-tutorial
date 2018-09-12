@@ -4,7 +4,7 @@ import { Header, SwipeableMenu } from 'components';
 
 const HeaderWithSwipeableMenu = (props) => {
   const {
-    closeMenu, openMenu, loginButtonContainer, leftMenuIsOpened,
+    closeMenu, openMenu, loginButtonContainer, leftMenuIsOpened, title,
   } = props;
 
   const MENU_ITEMS = [
@@ -33,7 +33,7 @@ const HeaderWithSwipeableMenu = (props) => {
   return (
     <Header
       openMenu={openMenu}
-      title="Home"
+      title={title}
       swipeableMenu={(
         <SwipeableMenu
           isOpenedByDefault={leftMenuIsOpened}
@@ -48,10 +48,15 @@ const HeaderWithSwipeableMenu = (props) => {
 };
 
 HeaderWithSwipeableMenu.propTypes = {
+  title: PropTypes.string,
   leftMenuIsOpened: PropTypes.bool.isRequired,
   openMenu: PropTypes.func.isRequired,
   closeMenu: PropTypes.func.isRequired,
   loginButtonContainer: PropTypes.node.isRequired,
+};
+
+HeaderWithSwipeableMenu.defaultProps = {
+  title: 'Home',
 };
 
 export default HeaderWithSwipeableMenu;

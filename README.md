@@ -711,7 +711,7 @@ Connect test config:
 }
 ```
 
-Add to eslintrc.json.
+Add to `eslintrc.json`:
 
 ```js
 "env": {
@@ -730,6 +730,8 @@ Add to `package.json`:
   }
 }
 ```
+
+It allows us to use `yarn test` to run all jest specs.
 
 Add simple test for out Button component:
 

@@ -111,7 +111,7 @@ yarn add babel-eslint -D
 
 Babel-eslint allows you to lint ALL valid Babel code
 
-We're gonna use airbnb eslint config. There are few dependencies that are needed to be installed.
+There are few dependencies that are needed to be installed.
 
 This package provides Airbnb's .eslintrc as an extensible shared config
 
@@ -131,7 +131,7 @@ Install Static AST checker for accessibility rules on JSX elements.
 yarn add eslint-plugin-jsx-a11y -D
 ```
 
-React specific linting rules for ESLint
+Install eslint plugin for React
 
 ```bash
 yarn add eslint-plugin-react -D
@@ -142,6 +142,8 @@ Initialize eslint config
 ```bash
 yarn run eslint --init
 ```
+
+We're gonna use airbnb eslint config.
 
 Choose the following settings:
 
@@ -175,7 +177,7 @@ We're gonna use `.js` extensions instead of `.jsx` because JSX is not standard J
 }
 ```
 
-## Step 4 - Material UI integration
+## Step 5 - Material UI integration
 
 In a nutshell, Material-UI is an open-source project that features React components that implement Google’s Material Design.
 
@@ -437,7 +439,7 @@ export default MainDocument;
 
 Now we're ready to implement some pages with components.
 
-## Step 5 Storybook Integration
+## Step 6 Storybook Integration
 
 Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
 
@@ -568,7 +570,7 @@ This is possible because all components are dynamically exported on `components/
 
 Let's create our first atom - material Button.
 
-## Step 6 - Create Atoms
+## Step 7 - Create Atoms
 
 Atoms are the basic building blocks of matter. Applied to web interfaces, atoms are our HTML tags, such as a form label, an input or a button.
 
@@ -650,7 +652,7 @@ Then we will see this:
 
 ![StoryBook](public/images/storybook-initial.png "Storybook screenshot")
 
-## Step 7 - Add jest for testing
+## Step 8 - Add jest for testing
 
 Add jest as development dependency
 
@@ -709,7 +711,7 @@ Connect test config:
 }
 ```
 
-Add to eslintrc.json. This will add all the jest related things to your environment, eliminating the linter errors/warnings:
+Add to eslintrc.json.
 
 ```js
 "env": {
@@ -717,7 +719,9 @@ Add to eslintrc.json. This will add all the jest related things to your environm
 },
 ```
 
-Add script for testing:
+This will add all the jest related things to your environment, eliminating the linter errors/warnings
+
+Add to `package.json`:
 
 ```js
 {
@@ -1004,7 +1008,7 @@ We're gonna create few more atoms using same approach:
 - Toolbar
 - Typography
 
-## Step 8 - Creating Moleculus
+## Step 9 - Creating Moleculus
 
 Molecules are groups of two or more atoms held together by chemical bonds. These combinations of atoms take on their own unique properties, and become more tangible and operational than atoms.
 
@@ -1215,7 +1219,7 @@ describe('Header', () => {
 });
 ```
 
-## Step 9 - Creating Organisms
+## Step 10 - Creating Organisms
 
 Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
 
@@ -1344,7 +1348,7 @@ describe('HeaderWithSwipeableMenu', () => {
 });
 ```
 
-## Step 10 - Creating Templates
+## Step 11 - Creating Templates
 
 Templates are page-level objects that place components into a layout and articulate the design’s underlying content structure. To build on our previous example, we can take the HeaderWithMenu organism and apply it to a home template.
 
@@ -1434,7 +1438,7 @@ describe('Home', () => {
 });
 ```
 
-## Step 11 - Pages
+## Step 12 - Create Pages
 
 Now we can use nextjs pages as an entry point
 
@@ -1460,7 +1464,7 @@ The file-system is the main API. Every .js file becomes a route that gets automa
 
 Now if we run `yarn dev` we can access this page on `localhost:3000`
 
-## Snapshot testing
+## Step 13 - Creating Snapshot tests
 
 Snapshot tests are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
 
@@ -1548,7 +1552,7 @@ describe('Home Page', () => {
 });
 ```
 
-## Authentication
+## Step 14 - Authentication implementation
 
 To communicate with github graphql api we need to create a github application first. Follow these steps to create your github app https://developer.github.com/apps/building-github-apps/creating-a-github-app/
 
@@ -1751,7 +1755,7 @@ class Callback extends React.Component {
 export default withRouter(Callback);
 ```
 
-## GraphQL with Apollo
+## Step 15 - GraphQL with Apollo integration
 
 Apollo Client is the best way to use GraphQL to build client applications. The client is designed to help you quickly build a UI that fetches data with GraphQL, and can be used with any JavaScript front-end.
 
@@ -1846,7 +1850,9 @@ const searchTopRubyRepos = gql`
 export default searchTopRubyRepos;
 ```
 
-It's good practice to extract "smart" components to `containers` folder.
+#### Containers
+
+If we need to implement some component with it's own state management or side effects (in other words smart component) we place it in `containers` folder. All components with graphql/REST requests will be there.
 
 We can use graphql queries in our containers using `react-apollo` Query component.
 
@@ -1920,203 +1926,6 @@ const TopRuby = () => (
 export default TopRuby;
 ```
 
-## Draft (move to correct place if needed)
+## Demo App
 
-Babel plugin resolver
-
-```bash
-yarn add babel-plugin-module-resolver -D
-```
-
-A Babel plugin to add a new resolver for your modules when compiling your code using Babel. This plugin allows you to add new "root" directories that contain your modules. It also allows you to setup a custom alias for directories, specific files, or even other npm modules.
-
-`.babelrc`
-
-```js
-"plugins": [
-  ["module-resolver", {
-    "root": ["./"],
-    "alias": {
-      "components": "./components",
-      "containers": "./containers",
-      "queries": "./graphql/queries"
-    }
-  }]
-]
-```
-
-Eslint resolve for babel-plugin-module-resolver. (To avoid eslint errors).
-
-```bash
-yarn add eslint-import-resolver-babel-module -D
-```
-
-`eslintrc.json`
-
-```js
-"settings": {
-  "import/resolver": {
-    "node": {
-      "paths": ["./"]
-    },
-    "babel-module": {}
-  }
-},
-```
-
-## GraphQL
-
-All graphql queries will be in `graphql/queries` folder
-
-#### Viewer
-
-`graphql/queries/viewer.js`
-
-```js
-import gql from 'graphql-tag';
-
-const viewer = gql`
-{
-  viewer {
-    login,
-    avatarUrl
-  }
-}
-`;
-
-export default viewer;
-```
-
-#### ViewerLast100Repositories
-
-`graphql/queries/viewerLast100Repositories.js`
-
-```js
-import gql from 'graphql-tag';
-
-const viewerLast100Repositories = gql`
-{
-  viewer {
-    repositories(last:100) {
-      edges {
-        node {
-          id
-          name
-          description
-        }
-      }
-    }
-  }
-}
-`;
-
-export default viewerLast100Repositories;
-```
-
-## Containers
-
-If we need to implement some component with it's own state management or side effects (in other words smart component) we place it in `containers` folder. All components with graphql/REST requests will be there.
-
-#### Github Login Button
-
-`containers/GithubLoginButton/index.js`
-`containers/GithubLoginButton/index.test.js`
-
-#### Repo List
-
-`containers/ViewerRepoList/index.js`
-` containers/ViewerRepoList/index.test.js`
-
-Add fetch
-
-```
-yarn add isomorphic-unfetch
-```
-
-Add cookies manager lib
-
-```
-yarn add js-cookie
-```
-
-For snapshot testing:
-
-```bash
-yarn add react-test-renderer -D
-```
-
-Add script into `package.json` to run tests:
-
-```js
-"scripts": {
-  "dev": "next",
-  "test": "NODE_ENV=test jest"
-}
-```
-
-
-Specify Jest Jest global variables in `.eslintrc.json`:
-
-```js
-{
-  "env": {
-    "jest": true
-  },
-  "extends": "airbnb"
-}
-```
-
-`.babelrc`:
-
-```js
-{
-  "env": {
-    "development": {
-      "presets": ["next/babel"]
-    },
-    "production": {
-      "presets": ["next/babel"]
-    },
-    "test": {
-      "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]]
-    }
-  }
-}
-```
-
-## Material-UI
-
-Add material-ui for styled components to nextjs app
-
-```bash
-yarn add @material-ui/core
-```
-
-## Authentication
-
-To communicate with github graphql api we need to create a github application first. Follow these steps to create your github app https://developer.github.com/apps/building-github-apps/creating-a-github-app/
-
-For development environment Homepage URL - http://localhost:3000, Authorization callback URL - http://localhost:3000/auth/github/callback
-
-Store client ID and client secret in `env-config.js`. Add this file to `.gitignore`
-
-```js
-module.exports = {
-  serverRuntimeConfig: { // Will only be available on the server side
-    githubClientId: 'secret',
-    githubClientSecret: 'secret',
-  },
-};
-```
-
-Add `isomorphic-unfetch` for async calls
-
-```bash
-yarn add isomorphic-unfetch
-```
-
-Cookie package for storing access_token
-
-```bash
-yarn add js-cookie
-```
+https://next-github.herokuapp.com/

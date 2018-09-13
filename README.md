@@ -2,13 +2,15 @@
 
 ## Step 1 - Yarn installation
 
-The first method would be to use npm
+There are two options how to install Yarn. The first option is to use npm:
 
 ```bash
 npm install -g yarn
 ```
 
-The other method would be to go to the official download page https://yarnpkg.com/en/docs/install and get the installer for your operating system and run it.
+Another option is to go to the official download page and get the installer for your operating system and run it.
+
+The other method would be to go to [the official download page](https://yarnpkg.com/en/docs/install) and get the installer for your operating system and run it.
 
 ## Step 2 - Project initialization
 
@@ -32,13 +34,13 @@ Then open the "package.json" in the github-client directory and add the followin
 }
 ```
 
-Now everything is ready. Run the following command to start the dev server:
+Everything is ready. To start the dev server, you need to run the following command:
 
 ```bash
 yarn dev
 ```
 
-When you run `localhost:3000` you're gonna see this page:
+When you run `localhost:3000` you will see this page:
 
 ![404](public/images/nextjs-404.png "404 Page screenshot")
 
@@ -93,17 +95,13 @@ import { Home } from '../../components';
 
 ## Step 4 Linters configuration
 
-Let's integrate linters to our app to avoid big refactoring in the future.
-
-Add eslint as development dependency
+To avoid big refactoring in the future, you need to integrate linters to your app. For that, add eslint as development dependency:
 
 ```bash
 yarn add eslint -D
 ```
 
-We need a wrapper for babel’s parser used for eslint
-
-Use yarn to install the package:
+You need a wrapper for babel’s parser used for eslint. Use yarn to install package:
 
 ```bash
 yarn add babel-eslint -D
@@ -111,15 +109,14 @@ yarn add babel-eslint -D
 
 Babel-eslint allows you to lint ALL valid Babel code
 
-There are few dependencies that are needed to be installed.
-
-This package provides Airbnb's .eslintrc as an extensible shared config
+There are few dependencies that you have to install.
+This package provides Airbnb's .eslintrc as an extensible shared config.
 
 ```bash
 yarn add eslint-config-airbnb -D
 ```
 
-Install ESLint plugin with rules that help validate proper imports
+Install ESLint plugin with rules that help validate proper imports.
 
 ```bash
 yarn add eslint-plugin-import -D
@@ -131,30 +128,26 @@ Install Static AST checker for accessibility rules on JSX elements.
 yarn add eslint-plugin-jsx-a11y -D
 ```
 
-Install eslint plugin for React
+Install eslint plugin for React.
 
 ```bash
 yarn add eslint-plugin-react -D
 ```
 
-Initialize eslint config
+Initialize eslint config.
 
 ```bash
 yarn run eslint --init
 ```
 
-We're gonna use airbnb eslint config.
+We're going to use airbnb eslint config.
 
 Choose the following settings:
 
 How would you like to configure ESLint? `Use a popular style guide`
-
 Which style guide do you want to follow? `Airbnb`
-
 Do you use React? `Yes`
-
 What format do you want your config file to be in? `JSON`
-
 Would you like to install them now with npm? `No`
 
 Now we have `.eslintrc.json` with the following configuration
@@ -165,7 +158,7 @@ Now we have `.eslintrc.json` with the following configuration
 }
 ```
 
-We're gonna use `.js` extensions instead of `.jsx` because JSX is not standard JS, and is not likely to ever be. So we explicitly add this option to the `.eslintc.json`:
+We're going to use `.js` extensions instead of `.jsx` because JSX is not standard JS, and is not likely to ever be. So we explicitly add this option to the `.eslintc.json`:
 
 ```js
 {
@@ -193,7 +186,7 @@ First of all install some additional packages.
 yarn add jss
 ```
 
-JSS is a more powerful abstraction over CSS. It uses JavaScript as a language to describe styles in a declarative and maintainable way. It is a high performance JS to CSS compiler which works at runtime and server-side.
+JSS is a more powerful abstraction than CSS. It uses JavaScript as a language to describe styles in a declarative and maintainable way. It is a high performance JS to CSS compiler which works at runtime and server-side.
 
 #### Install react-jss:
 
@@ -201,9 +194,7 @@ JSS is a more powerful abstraction over CSS. It uses JavaScript as a language to
 yarn add react-jss
 ```
 
-React-JSS provides components for JSS as a layer of abstraction.
-
-Benefits compared to lower level core:
+We use React-JSS because it provides components for JSS as a layer of abstraction and has the following range of benefits compared to lower level core:
 
 - Theming support.
 - Critical CSS extraction.
@@ -231,7 +222,7 @@ yarn add @material-ui/core @material-ui/icons
 
 There is an example app that shows how to properly integrate material-ui specifically for nextjs framework. https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 
-Create `lib/getPageContext.js`
+Now create `lib/getPageContext.js`
 
 ```js
 /* eslint-disable no-underscore-dangle */
@@ -273,10 +264,10 @@ export default function getPageContext() {
 
 Next.js uses the App component to initialize pages. You can override it and control the page initialization. Which allows you to do amazing things like:
 
-Persisting layout between page changes
-Keeping state when navigating pages
-Custom error handling using componentDidCatch
-Inject additional data into pages (for example by processing GraphQL queries)
+- Persisting layout between page changes
+- Keeping state when navigating pages
+- Custom error handling using componentDidCatch
+- Inject additional data into pages (for example by processing GraphQL queries)
 
 To override, create the `./pages/_app.js` file and override the App class as shown below:
 
@@ -336,7 +327,7 @@ export default MainApp;
 
 Pages in Next.js skip the definition of the surrounding document's markup. For example, you never include `<html>`, `<body>`, etc. To override that default behavior, you must create a file at `./pages/_document.js`, where you can extend the Document class.
 
-We're gonna use codebase from the material-ui official repo example with nextjs:
+You need to use codebase from the material-ui official repo example with nextjs:
 
 ```js
 import React from 'react';
@@ -443,9 +434,9 @@ Now we're ready to implement some pages with components.
 
 Storybook is a development environment for UI components. It allows you to browse a component library, view the different states of each component, and interactively develop and test components.
 
-Startguide for react - https://storybook.js.org/basics/guide-react
+Here you can find a [Startguide](https://storybook.js.org/basics/guide-react) for react.
 
-First of all, you need to add @storybook/react to your project. To do that, simply run:
+First of all, you need to add `@storybook/react` to your project. To do that, simply run:
 
 ```bash
 yarn add @storybook/react -D
@@ -461,13 +452,13 @@ Then add the following script to your package json in order to start the storybo
 }
 ```
 
-Create the config file
+After that, create the config file.
 
-Storybook can be configured in several different ways. That’s why we need a config directory. We’ve added a `-c` option to the above script mentioning `.storybook` as the config directory.
+Storybook can be configured in several different ways. That’s why we need a config directory. We’ve added a -c option to the above script mentioning .storybook as the config directory.
 
 For the basic Storybook configuration file, you don’t need to do much, but simply tell Storybook where to find stories.
 
-To do that, simply create a file at `.storybook/config.js` with the following content:
+For that, simply create a file at .storybook/config.js with the following content:
 
 ```js
 import { configure } from '@storybook/react';
@@ -481,9 +472,9 @@ function loadStories() {
 configure(loadStories, module);
 ```
 
-Here we use Webpack’s require.context to load modules dynamically. Have a look at the relevant Webpack docs to learn more about how to use require.context.
+Here we use Webpack’s require.context to load modules dynamically. You can learn a lot of interesting things about how to use require.context if you take a look at the relevant Webpack docs.
 
-Jest doesn't support webpack require.context. So we need to add babel plugin to make it work.
+So, we need to add babel plugin to make it work.
 
 ```bash
 yarn add babel-plugin-require-context-hook -D
@@ -516,7 +507,7 @@ registerRequireContextHook();
 export default configure({ adapter: new Adapter() });
 ```
 
-All files with `.stories` extension inside the `src/components` will be required dynamically.
+All files with .stories extension inside the src/components will be required dynamically.
 
 Create separate babel config for storybook to avoid conflicts with different environments.
 
@@ -539,17 +530,8 @@ Adjust eslint config (so we don't see warnings when importing storybook packages
 Storybook is all about writing stories. Usually a story contains a single state of one of your components. That’s like a visual test case.
 
 Technically, a story is a function that returns a React element.
-
-We're gonna use atomic design methodology for our app.
-
-Popularly known within the design world, Atomic Design helps to build consistent, solid and reusable design systems. Plus, in the world of React that stimulate the componentization, Atomic Design is used unconsciously; but when used in the right way, it becomes a powerful ally for developers.
-
-Atomic design references:
-https://cheesecakelabs.com/br/blog/atomic-design-react/
-https://medium.com/@yejodido/atomic-components-managing-dynamic-react-components-using-atomic-design-part-1-5f07451f261f
-https://github.com/Rulox/react-atomic-structure
-https://github.com/danilowoz/react-atomic-design
-http://ubie.io/atomic-design/
+We're going to use atomic design methodology for our app.
+Popularly known within the design world, Atomic Design helps to build consistent, solid and reusable design systems. Plus, in the world of React that stimulates the componentization, Atomic Design is used unconsciously; but when used in the right way, it becomes a powerful tool for developers.
 
 First of all create `index.js` entrypoint for components directory:
 
@@ -604,7 +586,7 @@ Button.propTypes = {
 export default Button;
 ```
 
-And then story for this atom.
+And then let’s write a story for this atom.
 
 `components/atoms/Button/index.stories.js`
 
@@ -642,7 +624,7 @@ storiesOf('atoms/Button', module)
   ));
 ```
 
-Run:
+Now, let’s run it:
 
 ```bash
 yarn storybook
@@ -654,13 +636,13 @@ Then we will see this:
 
 ## Step 8 - Add jest for testing
 
-Add jest as development dependency
+You need to add Jest as development dependency
 
 ```bash
 yarn add jest -D
 ```
 
-Jest is a complete and ready to set-up JavaScript testing solution. Works out of the box for any React project.
+Jest is a complete and ready to set-up JavaScript testing solution. Works out-of-the-box for any React project.
 
 Add enzyme
 
@@ -670,7 +652,7 @@ yarn add enzyme enzyme-adapter-react-16 -D
 
 Enzyme is a JavaScript Testing utility for React that makes it easier to assert, manipulate, and traverse your React Components' output.
 
-We need need different babel presets for test environment specifically for nextjs app.
+We need different babel presets for test environment specifically for nextjs app.
 
 `.babelrc`
 
@@ -733,7 +715,7 @@ Add to `package.json`:
 
 It allows us to use `yarn test` to run all jest specs.
 
-Add simple test for out Button component:
+Add simple test for our Button component:
 
 ```js
 import React from 'react';
@@ -748,9 +730,9 @@ describe('Button', () => {
 });
 ```
 
-Now if we run `yarn test` we should 1 passed spec.
+Now if we run yarn test we should have 1 passed spec.
 
-Ok, let's add more simple components (atoms) which we will use for our home page.
+Got it? Now, let's add more simple components (atoms) which we will use for our home page.
 
 #### AppBar atom
 
@@ -1005,24 +987,26 @@ We're gonna create few more atoms using same approach:
 - IconButton
 - List
 - ListItem
+- ListItemIcon
+- ListItemText
+- Loader
 - MenuIcon
 - SwipeableDrawer
 - Toolbar
 - Typography
+- Grid
 
 ## Step 9 - Creating Moleculus
 
-Molecules are groups of two or more atoms held together by chemical bonds. These combinations of atoms take on their own unique properties, and become more tangible and operational than atoms.
-
-Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.
+Things are getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound (just like in real world). These molecules take on their own properties and serve as the backbone of our design systems.
 
 For example, a form label, input or button aren’t too useful by themselves, but combine them together as a form and now they can actually do something together.
 
 Building up to molecules from atoms encourages a “do one thing and do it well” mentality. While molecules can be complex, as a rule of thumb they are relatively simple combinations of atoms built for reuse.
 
-#### SideBarMenu Molecule
+Now we need to create first molecule component. It will be SimpleCard that consists of atoms.
 
-Now we gonna create first moleculue component. It will be SimpleCard which will consist of atoms.
+#### SimpleCard Molecule
 
 `components/moleculus/SimpleCard/index.js`
 
@@ -1120,7 +1104,7 @@ describe('SimpleCard', () => {
 });
 ```
 
-#### Header molecule
+#### Create Header molecule
 
 `components/moleculus/Header/index.js`
 
@@ -1221,17 +1205,17 @@ describe('Header', () => {
 });
 ```
 
-## Step 10 - Creating Organisms
+## Step 10 - Build Organisms
 
-Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
+Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
 
-We’re starting to get increasingly concrete. A client might not be terribly interested in the molecules of a design system, but with organisms we can see the final interface beginning to take shape. Dan Mall (who I’m working with on several projects) uses element collages, which articulate ideas for a few key organisms to facilitate client conversations and shape the visual direction (all without having to construct full comps).
+We’re starting to get increasingly concrete. A client might not be terribly interested in the molecules of a design system, but with organisms we can see the final interface beginning to take shape.
 
 Organisms can consist of similar and/or different molecule types. For example, a masthead organism might consist of diverse components like a logo, primary navigation, search form, and list of social media channels. But a “product grid” organism might consist of the same molecule (possibly containing a product image, product title and price) repeated over and over again.
 
 Building up from molecules to organisms encourages creating standalone, portable, reusable components.
 
-#### Header with swipeable menu organism
+#### Let’s create a Header with swipeable menu organism:
 
 `components/organisms/HeaderWithSwipeableMenu/index.js`
 
@@ -1358,7 +1342,7 @@ This Home template displays all the necessary page components functioning togeth
 
 Another important characteristic of templates is that they focus on the page’s underlying content structure rather than the page’s final content. Design systems must account for the dynamic nature of content, so it’s very helpful to articulate important properties of components like image sizes and character lengths for headings and text passages.
 
-#### Home template
+#### Let’s build Home template:
 
 `components/templates/Home/index.js`
 
@@ -1462,17 +1446,425 @@ const Index = () => (
 export default Index;
 ```
 
-The file-system is the main API. Every .js file becomes a route that gets automatically processed and rendered.
+The file-system is the main API. Every .js file becomes a route that gets automatically processed and rendered. If we run yarn dev we can access this page on localhost:3000
 
-Now if we run `yarn dev` we can access this page on `localhost:3000`
+## Step 13 - Implementing Authentication
 
-## Step 13 - Creating Snapshot tests
+To communicate with github graphql api we need to create a github application first. Follow these steps to create your github app https://developer.github.com/apps/building-github-apps/creating-a-github-app/
 
-Snapshot tests are a very useful tool whenever you want to make sure your UI does not change unexpectedly.
+For development environment Homepage URL - http://localhost:3000, Authorization callback URL - http://localhost:3000/auth/github/callback
 
-A typical snapshot test case for a mobile app renders a UI component, takes a screenshot, then compares it to a reference image stored alongside the test. The test will fail if the two images do not match: either the change is unexpected, or the screenshot needs to be updated to the new version of the UI component.
+To use github secret keys we will use dotenv package.
 
-Add react-test-renderer
+create `next.config.js` with following commands:
+
+`next.config.js`
+
+```js
+require('dotenv').config();
+
+const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
+module.exports = {
+  webpack: (config) => {
+    config.plugins = config.plugins || [];
+
+    config.plugins = [
+      ...config.plugins,
+
+      // Read the .env file
+      new Dotenv({
+        path: path.join(__dirname, '.env'),
+        systemvars: true,
+      }),
+    ];
+
+    return config;
+  },
+};
+```
+
+Now, you need to add github app secret keys. We can use `.env` file for storing secret API keys, that  will be available only on server side.
+
+`.env`
+
+```js
+GITHUB_CLIENT_ID = '<CLIENT>'
+GITHUB_CLIENT_SECRET = '<SECRET>'
+```
+
+Add this file to `.gitignore`
+
+#### Containers
+
+If we need to implement some component with it's own state management or side effects (in other words smart component) we place it in `containers` folder. All components with graphql/REST requests will be there.
+
+We can use graphql queries in our containers using `react-apollo` Query component.
+
+#### Github Login Button Container
+
+We need login button container to make request to github authentication endpoint and redirect to callback page.
+
+`containers/GithubLoginButtonContainer/index.js`
+
+```js
+import React from 'react';
+import Router from 'next/router';
+import { Query } from 'react-apollo';
+import { Button, Loader } from 'components';
+import Cookies from 'js-cookie';
+import viewer from 'graphql/queries/viewer';
+
+class GithubLoginButtonContainer extends React.Component {
+  handleSignIn = () => {
+    Router.push({
+      pathname: 'https://github.com/login/oauth/authorize',
+      query: {
+        client_id: '55a16b6d3467b24fdde9',
+      },
+    });
+  };
+
+  handleSignOut = () => {
+    Cookies.remove('access_token');
+    Router.push('/');
+  };
+
+  render() {
+    const { handleSignIn, handleSignOut } = this;
+
+    return (
+      <Query query={viewer}>
+        {({ loading, error, data }) => {
+          if (loading) {
+            return (
+              <Loader color="secondary" />
+            );
+          }
+          if (error) {
+            return (
+              <Button color="secondary" onClick={handleSignIn}>
+                Sign In
+              </Button>
+            );
+          }
+          return (
+            <React.Fragment>
+              {data.viewer.login}
+              <Button color="secondary" onClick={handleSignOut}>
+                Sign Out
+              </Button>
+            </React.Fragment>
+          );
+        }}
+      </Query>
+    );
+  }
+}
+
+export default GithubLoginButtonContainer;
+```
+
+Next, create tests for our container
+
+`containers/GithubLoginButtonContainer/index.test.js`
+
+```js
+import React from 'react';
+import { shallow } from 'enzyme';
+import GithubLoginButton from 'containers/GithubLoginButton';
+
+jest.mock('next/config', () => () => ({ publicRuntimeConfig: { GithubClientId: '123' } }));
+
+jest.mock('next/router', () => (
+  { push: () => ({}) }
+));
+
+describe('GithubLoginButton', () => {
+  it('renders children when passed in', () => {
+    const wrapper = shallow(<GithubLoginButton>Test</GithubLoginButton>);
+    expect(wrapper.contains('Test')).toBe(true);
+  });
+
+  it('calls SignIn handler', () => {
+    const wrapper = shallow(<GithubLoginButton>Test</GithubLoginButton>);
+    const instance = wrapper.instance();
+    jest.spyOn(instance, 'handleSignIn');
+    instance.forceUpdate();
+    wrapper.find('Button').simulate('click');
+    expect(instance.handleSignIn).toHaveBeenCalled();
+  });
+});
+```
+
+#### Callback page
+
+GitHub redirects to a callback url on your website (which you provided when registering the app with GitHub).
+
+We need to implement callback page which will be used to obtain `access_token`.
+
+Install `isomorphic-unfetch` (Tiny 500b `fetch` "barely-polyfill"). We will use this package for authentication REST requests only.
+
+```bash
+yarn add isomorphic-unfetch
+```
+
+We need to store `access_token` on a client side using cookies. A simple, lightweight JavaScript API for handling cookies.
+
+```bash
+yarn add js-cookie
+```
+
+`pages/auth/github/login.js`
+
+```js
+import React from 'react';
+import Router, { withRouter } from 'next/router';
+import fetch from 'isomorphic-unfetch';
+import Cookies from 'js-cookie';
+import PropTypes from 'prop-types';
+
+class Callback extends React.Component {
+  static propTypes = {
+    errorMessage: PropTypes.string,
+    accessToken: PropTypes.string,
+  };
+
+  static defaultProps = {
+    errorMessage: undefined,
+    accessToken: undefined,
+  };
+
+  componentDidMount() {
+    const { accessToken } = this.props;
+
+    if (accessToken) {
+      Cookies.set('access_token', accessToken);
+      Router.push('/');
+    }
+  }
+
+  static async getInitialProps({ query }) {
+    const bodyData = JSON.stringify({
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      code: query.code,
+    });
+
+    const res = await fetch('https://github.com/login/oauth/access_token', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: bodyData,
+    });
+
+    const json = await res.json();
+    const errorMessage = json.error_description;
+    return { errorMessage, accessToken: json.access_token };
+  }
+
+  render() {
+    const { errorMessage } = this.props;
+
+    if (errorMessage) {
+      return (
+        <p>{errorMessage}</p>
+      );
+    }
+
+    return null;
+  }
+}
+
+export default withRouter(Callback);
+```
+
+`getInitialProps` is an async static method. It can asynchronously fetch anything that resolves to a JavaScript plain Object, which populates props.
+
+Data returned from `getInitialProps` is serialized when server rendering, similar to a `JSON.stringify`. Make sure the returned object from `getInitialProps` is a plain Object and not using `Date`, `Map` or `Set`.
+
+For the initial page load, `getInitialProps` will execute on the server only. `getInitialProps` will only be executed on the client when navigating to a different route via the Link component or using the routing APIs.
+
+## Step 14 - GraphQL with Apollo integration
+
+Apollo Client is the best way to use GraphQL to build client applications. The client is designed to help you quickly build a UI that fetches data with GraphQL, and can be used with any JavaScript front-end.
+
+With Apollo’s declarative approach to data fetching, all of the logic for retrieving your data, tracking loading and error states, and updating your UI is encapsulated in a single Query component. This encapsulation makes composing your Query components with your presentational components very easy.
+
+Let’s see how it looks like in practice with React Apollo.
+
+The easiest way to get started with Apollo Client is by using Apollo Boost. It's a starter kit that configures your client for you with recommended settings.
+
+Install packages:
+
+```bash
+yarn add apollo-boost react-apollo graphql graphql-tag
+```
+
+- `apollo-boost` Package containing everything you need to set up Apollo Client
+- `react-apollo` View layer integration for React
+- `graphql` Also parses your GraphQL queries
+- `graphql-tag` Provides template literal tag you can use to concisely write a GraphQL query that is parsed into the standard GraphQL AST
+
+Now you have all the dependencies you need, let’s create your Apollo Client. The only thing you need to get started is the endpoint for your GraphQL server.
+
+If you don’t pass in uri directly, it defaults to the /graphql endpoint on the same host your app is served from.
+
+
+#### GraphQL authentication
+
+Apollo Client uses the ultra flexible Apollo Link that includes several options for authentication.
+
+We will use cookies for storing github access_token and send it as an authorization header. It’s easy to add an authorization header to every HTTP request by adding `headers` to ApolloClient.
+
+It’s very easy to tell your network interface to send the cookie along with every request. You just need to pass the headers option. e.g. `headers: 'token'`
+
+In this example, we’ll pull the login token from cookies every time a request is sent:
+
+`pages/_app.js`
+
+```js
+const token = Cookies.get('access_token');
+
+const client = new ApolloClient({
+  uri: 'https://api.github.com/graphql',
+  headers: { authorization: `Bearer ${token}` },
+});
+
+class MainApp extends App {
+  // ...
+  render() {
+    // ...
+    const token = Cookies.get('access_token');
+
+    const client = new ApolloClient({
+      uri: 'https://api.github.com/graphql',
+      headers: { authorization: `Bearer ${token}` },
+    });
+
+    return (
+      <Container>
+        <ApolloProvider client={client}>
+          {/* ... */}
+        </ApolloProvider>
+      </Container>
+    );
+  }
+}
+```
+
+After that we can make requests to Github API using our token from cookies.
+
+#### GraphQL queries
+
+Let's implement our first graphql query
+
+This query finds last 50 repositories with more than 10000 stars
+
+`queries/searchTopRubyRepos.js`
+
+```js
+import gql from 'graphql-tag';
+
+const searchTopRubyRepos = gql`
+{
+  search(query: "language:Ruby stars:>10000", first: 50, type: REPOSITORY) {
+    edges {
+      node {
+        ... on Repository {
+          name
+          description
+          url
+        }
+      }
+    }
+  }
+}
+`;
+
+export default searchTopRubyRepos;
+```
+
+`containers/SearchRepoList/index.js`
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  SimpleCard, Loader, Grid, Typography,
+} from 'components';
+import { Query } from 'react-apollo';
+
+const SearchRepoList = ({ query }) => (
+  <Query query={query}>
+    {({ loading, error, data }) => {
+      if (loading) {
+        return (
+          <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
+            <Loader size={300} />
+          </Grid>
+        );
+      }
+      if (error) {
+        return (
+          <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
+            <Typography variant="headline">Please Sign In to fetch data</Typography>
+          </Grid>
+        );
+      }
+      return (
+        <React.Fragment>
+          {data.search.edges.map(repo => (
+            <Grid key={repo.node.id} item xs={6} sm={4} lg={3} xl={2}>
+              <SimpleCard
+                title={repo.node.name}
+                description={repo.node.description}
+                url={repo.node.url}
+              />
+            </Grid>
+          ))}
+        </React.Fragment>
+      );
+    }}
+  </Query>
+);
+
+SearchRepoList.propTypes = {
+  query: PropTypes.node.isRequired,
+};
+
+export default SearchRepoList;
+```
+
+Now let's implement nextjs page
+
+```js
+import React from 'react';
+import { Home } from 'components';
+import HeaderWithMenu from 'containers/HeaderWithMenu';
+import SearchRepoList from 'containers/SearchRepoList';
+import searchTopRubyRepos from 'graphql/queries/searchTopRubyRepos';
+
+const TopRuby = () => (
+  <Home
+    header={<HeaderWithMenu />}
+    content={<SearchRepoList query={searchTopRubyRepos} />}
+  />
+);
+
+export default TopRuby;
+```
+
+## Step 15 - Creating Snapshot tests
+
+Snapshot testing is a very useful tool whenever you want to make sure your UI doesn’t change unexpectedly.
+
+A typical snapshot test case for a mobile app renders a UI component, takes a screenshot, then compares it to a reference image stored alongside the test. The test will fail if the two images don’t match: either the change is unexpected, or the screenshot needs to be updated to the new version of the UI component.
+
+To add react-test-render, write this command
 
 ```bash
 yarn add react-test-renderer -D
@@ -1554,380 +1946,30 @@ describe('Home Page', () => {
 });
 ```
 
-## Step 14 - Authentication implementation
-
-To communicate with github graphql api we need to create a github application first. Follow these steps to create your github app https://developer.github.com/apps/building-github-apps/creating-a-github-app/
-
-For development environment Homepage URL - http://localhost:3000, Authorization callback URL - http://localhost:3000/auth/github/callback
-
-#### Add github app secret keys
-
-We can use `next.config.js` for storing secret api keys. Which will be available only on server side.
-
-`next.config.js`
-
-```js
-module.exports = {
-  serverRuntimeConfig: {
-    GithubClientId: '<ClientId>',
-    GithubClientSecret: '<ClientSecret>',
-  },
-};
-```
-
-Add this file to `.gitignore`
-
-#### Github login page
-
-We need login page which will be just some kind of loader. The main purpose of this page is to make request to github authentication endpoint and redirect to our callback page.
-
-Start with atom
-
-`components/atoms/Loader/index.js`
-
-```js
-import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-const Loader = props => (
-  <CircularProgress {...props} />
-);
-
-export default Loader;
-```
-
-`components/templates/GithubLogin/index.js`
-
-```js
-import React from 'react';
-import { Grid } from '@material-ui/core';
-import { HeaderWithMenu, Loader } from '../..';
-
-const GithubLogin = () => (
-  <div>
-    <HeaderWithMenu />
-    <div style={{ padding: 12 }}>
-      <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
-        <Loader size={500} />
-      </Grid>
-    </div>
-  </div>
-);
-
-export default GithubLogin;
-```
-
-`pages/auth/github/login.js`
-
-```js
-import React from 'react';
-import getConfig from 'next/config';
-import { GithubLogin } from '../../../components';
-
-class Login extends React.Component {
-  static async getInitialProps({ res }) {
-    const { serverRuntimeConfig: { GithubClientId } } = getConfig();
-
-    if (res) {
-      res.writeHead(302, {
-        Location: `https://github.com/login/oauth/authorize?client_id=${GithubClientId}`,
-      });
-      res.end();
-    }
-
-    return {};
-  }
-
-  render() {
-    return (
-      <GithubLogin />
-    );
-  }
-}
-
-export default Login;
-```
-
-`getInitialProps` is an async static method. It can asynchronously fetch anything that resolves to a JavaScript plain Object, which populates props.
-
-Data returned from `getInitialProps` is serialized when server rendering, similar to a `JSON.stringify`. Make sure the returned object from `getInitialProps` is a plain Object and not using `Date`, `Map` or `Set`.
-
-For the initial page load, `getInitialProps` will execute on the server only. `getInitialProps` will only be executed on the client when navigating to a different route via the Link component or using the routing APIs.
-
-`__tests__/auth/github/login.test.js`
+`__tests__/auth/github/callback.test.js`
 
 ```js
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Login from '../../../pages/auth/github/login';
+import Router from 'next/router';
+import Callback from '../../../pages/auth/github/callback';
 
-describe('Github Login Page', () => {
+describe('Github Callback Page', () => {
+
   it('matches snapshot', () => {
-    const component = renderer.create(<Login />);
+    const mockedRouter = { push: () => {} };
+    Router.router = mockedRouter;
+    const component = renderer.create(<Callback accessToken="sag" />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
 ```
 
-#### Callback page
-
-We need to implement callback page which will be used to obtain `access_token`.
-
-Install `isomorphic-unfetch` (Tiny 500b `fetch` "barely-polyfill"). We will use this package for authentication REST requests only.
-
-```bash
-yarn add isomorphic-unfetch
-```
-
-We need to store `access_token` on a client side using cookies. A simple, lightweight JavaScript API for handling cookies.
-
-```bash
-yarn add js-cookie
-```
-
-`pages/auth/github/callback.js`
-
-```js
-import React from 'react';
-import Router, { withRouter } from 'next/router';
-import fetch from 'isomorphic-unfetch';
-import getConfig from 'next/config';
-import Cookies from 'js-cookie';
-import PropTypes from 'prop-types';
-import { GithubLogin } from '../../../components';
-
-class Callback extends React.Component {
-  static propTypes = {
-    errorMessage: PropTypes.string,
-    accessToken: PropTypes.string,
-  };
-
-  static defaultProps = {
-    errorMessage: undefined,
-    accessToken: undefined,
-  };
-
-  componentDidMount() {
-    const { accessToken } = this.props;
-
-    if (accessToken) {
-      Router.push('/');
-    }
-  }
-
-  static async getInitialProps({ query }) {
-    const { serverRuntimeConfig: { GithubClientId, GithubClientSecret } } = getConfig();
-
-    const bodyData = JSON.stringify({
-      client_id: GithubClientId,
-      client_secret: GithubClientSecret,
-      code: query.code,
-    });
-
-    const res = await fetch('https://github.com/login/oauth/access_token', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: bodyData,
-    });
-
-    const json = await res.json();
-    const errorMessage = json.error_description;
-    return { errorMessage, accessToken: json.access_token };
-  }
-
-  render() {
-    const { errorMessage, accessToken } = this.props;
-
-    if (errorMessage) {
-      return (
-        <GithubLogin error={errorMessage} />
-      );
-    }
-
-    Cookies.set('access_token', accessToken);
-
-    return null;
-  }
-}
-
-export default withRouter(Callback);
-```
-
-## Step 15 - GraphQL with Apollo integration
-
-Apollo Client is the best way to use GraphQL to build client applications. The client is designed to help you quickly build a UI that fetches data with GraphQL, and can be used with any JavaScript front-end.
-
-With Apollo’s declarative approach to data fetching, all of the logic for retrieving your data, tracking loading and error states, and updating your UI is encapsulated in a single Query component. This encapsulation makes composing your Query components with your presentational components a breeze! Let’s see what this looks like in practice with React Apollo.
-
-The simplest way to get started with Apollo Client is by using Apollo Boost. It's starter kit that configures your client for you with recommended settings.
-
-Let’s install packages:
-
-```bash
-yarn add apollo-boost react-apollo graphql graphql-tag
-```
-
-- `apollo-boost` Package containing everything you need to set up Apollo Client
-- `react-apollo` View layer integration for React
-- `graphql` Also parses your GraphQL queries
-- `graphql-tag` Provides template literal tag you can use to concisely write a GraphQL query that is parsed into the standard GraphQL AST
-
-Great, now that you have all the dependencies you need, let’s create your Apollo Client. The only thing you need to get started is the endpoint for your GraphQL server. If you don’t pass in uri directly, it defaults to the /graphql endpoint on the same host your app is served from.
-
-#### GraphQL authentication
-
-Apollo Client uses the ultra flexible Apollo Link that includes several options for authentication.
-
-We will use cookies for storing github access_token and send it as an authorization header. It’s easy to add an authorization header to every HTTP request by adding `headers` to ApolloClient.
-
-It’s very easy to tell your network interface to send the cookie along with every request. You just need to pass the headers option. e.g. `headers: 'token'`
-
-In this example, we’ll pull the login token from cookies every time a request is sent:
-
-`pages/_app.js`
-
-```js
-const token = Cookies.get('access_token');
-
-const client = new ApolloClient({
-  uri: 'https://api.github.com/graphql',
-  headers: { authorization: `Bearer ${token}` },
-});
-
-class MainApp extends App {
-  // ...
-  render() {
-    // ...
-    const token = Cookies.get('access_token');
-
-    const client = new ApolloClient({
-      uri: 'https://api.github.com/graphql',
-      headers: { authorization: `Bearer ${token}` },
-    });
-
-    return (
-      <Container>
-        <ApolloProvider client={client}>
-          {/* ... */}
-        </ApolloProvider>
-      </Container>
-    );
-  }
-}
-```
-
-After that we can make requests to Github API using our token from cookies.
-
-#### GraphQL queries
-
-Let's implement our first graphql query
-
-This query finds last 50 repositories with more than 10000 stars
-
-`queries/searchTopRubyRepos.js`
-
-```js
-import gql from 'graphql-tag';
-
-const searchTopRubyRepos = gql`
-{
-  search(query: "language:Ruby stars:>10000", first: 50, type: REPOSITORY) {
-    edges {
-      node {
-        ... on Repository {
-          name
-          description
-          url
-        }
-      }
-    }
-  }
-}
-`;
-
-export default searchTopRubyRepos;
-```
-
-#### Containers
-
-If we need to implement some component with it's own state management or side effects (in other words smart component) we place it in `containers` folder. All components with graphql/REST requests will be there.
-
-We can use graphql queries in our containers using `react-apollo` Query component.
-
-`containers/SearchRepoList/index.js`
-
-```js
-import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  SimpleCard, Loader, Grid, Typography,
-} from 'components';
-import { Query } from 'react-apollo';
-
-const SearchRepoList = ({ query }) => (
-  <Query query={query}>
-    {({ loading, error, data }) => {
-      if (loading) {
-        return (
-          <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
-            <Loader size={300} />
-          </Grid>
-        );
-      }
-      if (error) {
-        return (
-          <Grid direction="row" justify="center" container spacing={24} style={{ padding: 24 }}>
-            <Typography variant="headline">Please Sign In to fetch data</Typography>
-          </Grid>
-        );
-      }
-      return (
-        <React.Fragment>
-          {data.search.edges.map(repo => (
-            <Grid key={repo.node.id} item xs={6} sm={4} lg={3} xl={2}>
-              <SimpleCard
-                title={repo.node.name}
-                description={repo.node.description}
-                url={repo.node.url}
-              />
-            </Grid>
-          ))}
-        </React.Fragment>
-      );
-    }}
-  </Query>
-);
-
-SearchRepoList.propTypes = {
-  query: PropTypes.node.isRequired,
-};
-
-export default SearchRepoList;
-```
-
-Now let's implement nextjs page
-
-```js
-import React from 'react';
-import { Home } from 'components';
-import HeaderWithMenu from 'containers/HeaderWithMenu';
-import SearchRepoList from 'containers/SearchRepoList';
-import searchTopRubyRepos from 'graphql/queries/searchTopRubyRepos';
-
-const TopRuby = () => (
-  <Home
-    header={<HeaderWithMenu />}
-    content={<SearchRepoList query={searchTopRubyRepos} />}
-  />
-);
-
-export default TopRuby;
-```
-
 ## Demo App
 
 https://next-github.herokuapp.com/
+
+## Source
+
+https://github.com/leksster/nextjs6-graphql-client-tutorial

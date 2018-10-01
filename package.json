@@ -15,12 +15,15 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
     "apollo-boost": "^0.1.15",
+    "dotenv": "^6.0.0",
+    "dotenv-webpack": "^1.5.7",
     "graphql": "^14.0.0",
     "graphql-tag": "^2.9.2",
     "isomorphic-unfetch": "^2.1.1",
@@ -35,6 +38,7 @@
     "styled-jsx": "^3.0.2"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.11",
     "@storybook/react": "^3.4.10",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",

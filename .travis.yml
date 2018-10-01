@@ -1,0 +1,8 @@
+sudo: false
+language: node_js
+node_js:
+  - "10"
+cache: yarn
+script:
+  - yarn lint || travis_terminate 1
+  - yarn test || travis_terminate 1

@@ -1,16 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import HeaderWithMenu from 'containers/HeaderWithMenu';
+import HeaderContainer from 'containers/HeaderContainer';
 
-describe('HeaderWithMenu', () => {
+describe('HeaderContainer', () => {
   it('renders component', () => {
     const wrapper = shallow(
-      <HeaderWithMenu />,
+      <HeaderContainer title="Home" />,
     );
 
-    const header = wrapper.find('Header');
+    const header = wrapper.find('HeaderWithSwipeableMenu');
     expect(header).toHaveLength(1);
     expect(header.props().title).toEqual('Home');
-    expect(header.props().swipeableMenu).toBeDefined();
+    expect(header.props().loginButtonContainer).toBeDefined();
   });
 });

@@ -9,7 +9,7 @@ describe('List', () => {
         <p>Lorem</p>
         <p>Ipsum</p>
         <p>Test</p>
-      </List>
+      </List>,
     );
     expect(wrapper.contains(<p>Test</p>)).toBe(true);
     expect(wrapper.contains(<p>Ipsum</p>)).toBe(true);

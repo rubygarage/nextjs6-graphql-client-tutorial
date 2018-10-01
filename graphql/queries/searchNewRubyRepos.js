@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-const dateArray = new Date().toLocaleDateString().split('/').reverse();
+// const dateArray = new Date().toLocaleDateString().split('/').reverse();
 
-const lastMonth = dateArray.map((elem, key) => (key === 1 ? elem - 1 : elem)).join('-');
+// const lastMonth = dateArray.map((elem, key) => (key === 1 ? elem - 1 : elem)).join('-');
 
 const searchNewJsRepos = gql`
 {

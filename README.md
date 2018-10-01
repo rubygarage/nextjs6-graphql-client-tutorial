@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/leksster/nextjs6-graphql-client-tutorial.svg?branch=master)](https://travis-ci.com/leksster/nextjs6-graphql-client-tutorial)
+
 # Nextjs6 with Apollo Graphql and Material-UI Tutorial
 
 ## Step 1 - Yarn installation
@@ -310,10 +312,13 @@ class MainApp extends App {
             theme={this.pageContext.theme}
             sheetsManager={this.pageContext.sheetsManager}
           >
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            {/*
+              CssBaseline kickstart an elegant, consistent, and simple baseline to build upon.
+            */}
             <CssBaseline />
-            {/* Pass pageContext to the _document though the renderPage enhancer
-                to render collected styles on server side. */}
+            {/*
+              Pass pageContext to the _document though the renderPage enhancer to render collected styles on server side.
+            */}
             <Component pageContext={this.pageContext} {...pageProps} />
           </MuiThemeProvider>
         </JssProvider>
@@ -323,6 +328,13 @@ class MainApp extends App {
 }
 
 export default MainApp;
+```
+
+You need to add this line to `.eslintrc.json` to avoid `document is not defined` error:
+
+```
+"env": {
+  "browser": true
 ```
 
 Pages in Next.js skip the definition of the surrounding document's markup. For example, you never include `<html>`, `<body>`, etc. To override that default behavior, you must create a file at `./pages/_document.js`, where you can extend the Document class.
@@ -348,8 +360,8 @@ class MainDocument extends Document {
           <meta
             name="viewport"
             content={
-              'user-scalable=0, initial-scale=1, ' +
-              'minimum-scale=1, width=device-width, height=device-height'
+              'user-scalable=0, initial-scale=1, '
+              + 'minimum-scale=1, width=device-width, height=device-height'
             }
           />
           {/* PWA primary color */}
@@ -396,7 +408,7 @@ MainDocument.getInitialProps = (ctx) => {
 
   const page = ctx.renderPage((Component) => {
     const WrappedComponent = (props) => {
-      pageContext = props.pageContext;
+      ({ pageContext } = props);
 
       return <Component {...props} />;
     };

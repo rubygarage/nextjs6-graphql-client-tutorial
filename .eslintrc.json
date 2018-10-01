@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint",
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "settings": {
     "import/resolver": {
@@ -13,7 +14,10 @@
   },
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true }
+    ]
   },
   "extends": "airbnb"
 }

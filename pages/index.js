@@ -5,7 +5,7 @@ import ViewerRepoList from 'containers/ViewerRepoList';
 
 const Index = () => (
   <Home
-    header={<HeaderContainer />}
+    header={<HeaderContainer title="Home" />}
     content={<ViewerRepoList />}
   />
 );

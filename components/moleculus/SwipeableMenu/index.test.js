@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SideBarMenu from '.';
+import SwipeableMenu from '.';
 import { ListItem, ListItemText, SwipeableDrawer } from '../..';
 
-describe('SideBarMenu', () => {
+describe('SwipeableMenu', () => {
   it('renders correct menu items using array of strings as props', () => {
     const mockedOpenMenu = jest.fn();
     mockedOpenMenu.mockReturnValueOnce(true);
@@ -12,8 +12,12 @@ describe('SideBarMenu', () => {
     mockedCloseMenu.mockReturnValueOnce(true);
 
     const wrapper = shallow(
-      <SideBarMenu
-        menuItems={['foo', 'bar', 'baz']}
+      <SwipeableMenu
+        menuItems={[
+          { id: 1, url: 'url.com', text: 'foo' },
+          { id: 2, url: 'url.com', text: 'bar' },
+          { id: 3, url: 'url.com', text: 'baz' },
+        ]}
         openMenu={mockedOpenMenu}
         closeMenu={mockedCloseMenu}
       />,

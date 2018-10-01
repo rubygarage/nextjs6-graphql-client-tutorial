@@ -131,9 +131,9 @@ exports[`Home Page renders cards with all information on success 1`] = `
           <div
             className="MuiCardActions-root-256"
           >
-            <button
+            <a
               className="MuiButtonBase-root-62 MuiButton-root-215 MuiButton-text-217 MuiButton-flat-220 MuiButton-sizeSmall-238 MuiCardActions-action-257"
-              disabled={false}
+              href="url.com"
               onBlur={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -144,8 +144,9 @@ exports[`Home Page renders cards with all information on success 1`] = `
               onTouchEnd={[Function]}
               onTouchMove={[Function]}
               onTouchStart={[Function]}
+              role="button"
               tabIndex="0"
-              type="button"
+              target="_blank"
             >
               <span
                 className="MuiButton-label-216"
@@ -155,7 +156,7 @@ exports[`Home Page renders cards with all information on success 1`] = `
               <span
                 className="MuiTouchRipple-root-72"
               />
-            </button>
+            </a>
           </div>
         </div>
       </div>

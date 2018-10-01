@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Index from 'pages';
-import { mount } from 'enzyme';
 import viewerLast100Repositories from 'graphql/queries/viewerLast100Repositories';
 import { MockedProvider } from 'react-apollo/test-utils';
 
@@ -28,7 +27,11 @@ describe('Home Page', () => {
             viewer: {
               repositories: {
                 edges: [
-                  { node: { id: '1', name: 'repo name', description: 'desc' } },
+                  {
+                    node: {
+                      id: '1', url: 'url.com', name: 'repo name', description: 'desc',
+                    },
+                  },
                 ],
               },
             },

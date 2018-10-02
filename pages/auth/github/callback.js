@@ -2,6 +2,7 @@ import React from 'react';
 import Router, { withRouter } from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import Cookies from 'js-cookie';
+import getConfig from 'next/config';
 import PropTypes from 'prop-types';
 
 class Callback extends React.Component {
@@ -25,9 +26,11 @@ class Callback extends React.Component {
   }
 
   static async getInitialProps({ query }) {
+    const { serverRuntimeConfig: { githubClientId, githubClientSecret } } = getConfig();
+
     const bodyData = JSON.stringify({
-      client_id: process.env.GITHUB_CLIENT_ID,
-      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      client_id: githubClientId,
+      client_secret: githubClientSecret,
       code: query.code,
     });
 

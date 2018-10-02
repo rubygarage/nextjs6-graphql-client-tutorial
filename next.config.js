@@ -1,23 +1,11 @@
-require('dotenv').config();
-
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+require('dotenv').config({ silent: process.env.NODE_ENV === 'production' });
 
 module.exports = {
-  webpack: (config) => {
-    const newConfig = { ...config };
-    newConfig.plugins = newConfig.plugins || [];
-
-    newConfig.plugins = [
-      ...newConfig.plugins,
-
-      // Read the .env file
-      new Dotenv({
-        path: path.join(__dirname, '.env'),
-        systemvars: true,
-      }),
-    ];
-
-    return newConfig;
+  serverRuntimeConfig: {
+    githubClientId: process.env.GITHUB_CLIENT_ID,
+    githubClientSecret: process.env.GITHUB_CLIENT_SECRET,
+  },
+  publicRuntimeConfig: {
+    githubClientId: process.env.GITHUB_CLIENT_ID,
   },
 };

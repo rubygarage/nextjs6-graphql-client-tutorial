@@ -2,15 +2,18 @@ import React from 'react';
 import Router from 'next/router';
 import { Query } from 'react-apollo';
 import { Button, Loader } from 'components';
+import getConfig from 'next/config';
 import Cookies from 'js-cookie';
 import viewer from 'graphql/queries/viewer';
 
 class GithubLoginButtonContainer extends React.Component {
   handleSignIn = () => {
+    const { publicRuntimeConfig: { githubClientId } } = getConfig();
+
     Router.push({
       pathname: 'https://github.com/login/oauth/authorize',
       query: {
-        client_id: process.env.GITHUB_CLIENT_ID,
+        client_id: githubClientId,
       },
     });
   };

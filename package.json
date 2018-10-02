@@ -23,7 +23,6 @@
     "@material-ui/icons": "^2.0.3",
     "apollo-boost": "^0.1.15",
     "dotenv": "^6.0.0",
-    "dotenv-webpack": "^1.5.7",
     "graphql": "^14.0.0",
     "graphql-tag": "^2.9.2",
     "isomorphic-unfetch": "^2.1.1",

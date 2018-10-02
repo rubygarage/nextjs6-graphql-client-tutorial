@@ -35,12 +35,16 @@ const SimpleCard = (props) => {
         <Typography variant="headline" component="h3">
           {title}
         </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {description}
-        </Typography>
+        {description && (
+          <Typography className={classes.pos} color="textSecondary">
+            {description}
+          </Typography>
+        )}
       </CardContent>
       <CardActions>
-        <Button target="_blank" href={url} size="small">Learn More</Button>
+        <Button target="_blank" href={url} size="small">
+          Learn More
+        </Button>
       </CardActions>
     </Card>
   );
